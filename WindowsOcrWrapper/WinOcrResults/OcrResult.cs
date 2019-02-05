@@ -2,7 +2,7 @@
 
 namespace WindowsOcrWrapper.WinOcrResults
 {
-    public partial class OcrResult
+    public class OcrResult
     {
         public string Text { get; set; }
 

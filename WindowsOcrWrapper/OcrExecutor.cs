@@ -5,8 +5,9 @@ using System.Management.Automation;
 using System.Reflection;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
+using WindowsOcrWrapper.WinOcrResults;
 
-namespace WindowsOcrWrapper.WinOcrResults
+namespace WindowsOcrWrapper
 {
     /// <summary>
     /// Needs to be singleton, as it's the class that makes sure that Ocr is not invoked in parallel.
