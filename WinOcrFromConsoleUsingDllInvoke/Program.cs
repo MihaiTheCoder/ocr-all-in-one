@@ -9,23 +9,16 @@ using System.Net.Http.Headers;
 
 namespace WinOcrFromConsoleUsingDllInvoke
 {
+    /// <summary>
+    /// Add dependency injection, remove test client ...
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
-            var dir = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\";
-            string[] files = Directory.GetFiles(dir).Where(f => f.EndsWith("png")).ToArray();
-            var png = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\AAA_BXSP001_060.mxf_clock.png";
-            /*
-            OcrExecutor ocrExecutor = new OcrExecutor();
-            
 
-            Parallel.For(0, files.Length, async (i) => {
-                var result = await ocrExecutor.GetOcrResultAsync(files[i]);
-                Console.WriteLine(result.Text);
-                Console.WriteLine(i);
-            });
-            Console.ReadKey();*/
+            var png = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\AAA_BXSP001_060.mxf_clock.png";
+            //RunOcrForAllClocksInParallel();
 
             string baseAddress = "http://localhost:9000/";
 
@@ -34,14 +27,28 @@ namespace WinOcrFromConsoleUsingDllInvoke
             {
                 // Create HttpCient and make a request to api/values 
                 HttpClient client = new HttpClient();
-
-                //var response = client.GetAsync(baseAddress + "api/values").Result;
+                
                 var response = UploadImage(baseAddress + "api/values", File.ReadAllBytes(png)).Result;
 
                 Console.WriteLine(response);
                 Console.WriteLine(response.Content.ReadAsStringAsync().Result);
                 Console.ReadLine();
             }
+        }
+
+        private static void RunOcrForAllClocksInParallel()
+        {
+            var dir = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\";
+            string[] files = Directory.GetFiles(dir).Where(f => f.EndsWith("png")).ToArray();
+            OcrExecutor ocrExecutor = new OcrExecutor();
+
+            Parallel.For(0, files.Length, async (i) =>
+            {
+                var result = await ocrExecutor.GetOcrResultAsync(files[i]);
+                Console.WriteLine(result.Text);
+                Console.WriteLine(i);
+            });
+            Console.ReadKey();
         }
 
         static async public Task<HttpResponseMessage> UploadImage(string url, byte[] ImageData)
