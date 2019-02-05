@@ -11,7 +11,10 @@ namespace WindowsOcrWrapper
 {
     /// <summary>
     /// Needs to be singleton, as it's the class that makes sure that Ocr is not invoked in parallel.
-    /// On dispose, we dispose the powershell session, that we keep alive.
+    /// A powershell instance is started in background, powershell session that is closed when the object is disposed.
+    /// If you have multiple instances of OcrExecutor that run in parallel, the windows OCR dll will complain
+    /// If you execute the sync method from multiple threads in parallel the powershell will complain because it was not developed to work in a multi threaded fashion.
+    /// The Async API can be used from multiple threads, and it works fine as long as you have a single instance of OcrExecutor
     /// </summary>
     public class OcrExecutor : IDisposable
     {
