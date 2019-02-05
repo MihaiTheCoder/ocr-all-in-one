@@ -6,6 +6,7 @@ namespace System.Threading.Tasks.Schedulers
     /// <summary>
     /// Provides a task scheduler that ensures a maximum concurrency level while
     /// running on top of the ThreadPool.
+    /// Source: https://code.msdn.microsoft.com/Execution-Time-Based-dd4dbdb6/sourcecode?fileId=67470&pathId=1378361369    /// 
     /// </summary>
     public class LimitedConcurrencyLevelTaskScheduler : TaskScheduler
     {

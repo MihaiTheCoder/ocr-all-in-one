@@ -1,5 +1,8 @@
 ﻿using System;
+using System.IO;
+using System.Threading.Tasks;
 using WindowsOcrWrapper.WinOcrResults;
+using System.Linq;
 
 namespace WinOcrFromConsoleUsingDllInvoke
 {
@@ -7,10 +10,18 @@ namespace WinOcrFromConsoleUsingDllInvoke
     {
         static void Main(string[] args)
         {
-            var png = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\AAA_BXSP001_060.mxf_clock.png";            
+            var dir = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\";
+            string[] files = Directory.GetFiles(dir).Where(f => f.EndsWith("png")).ToArray();
+            var png = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\AAA_BXSP001_060.mxf_clock.png";
+
             OcrExecutor ocrExecutor = new OcrExecutor();
-            var ocrResult = ocrExecutor.GetOcrResultAsync(png).Result;
-            Console.WriteLine(ocrResult.Text);
+            
+
+            Parallel.For(0, files.Length, async (i) => {
+                var result = await ocrExecutor.GetOcrResultAsync(files[i]);
+                Console.WriteLine(result.Text);
+                Console.WriteLine(i);
+            });
             Console.ReadKey();
         }
     }
