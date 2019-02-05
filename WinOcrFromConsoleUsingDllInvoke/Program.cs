@@ -6,18 +6,19 @@ using System.Linq;
 using Microsoft.Owin.Hosting;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Configuration;
 
 namespace WinOcrFromConsoleUsingDllInvoke
 {
     /// <summary>
     /// Add dependency injection, remove test client ...
+    /// index.html is just a test html page to check if upload is working
     /// </summary>
     class Program
     {
         static void Main(string[] args)
-        {
-
-            var png = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\AAA_BXSP001_060.mxf_clock.png";
+        {            
+            var png = ConfigurationManager.AppSettings["ClocksFolder"] + @"\AAA_BXSP001_060.mxf_clock.png";
             //RunOcrForAllClocksInParallel();
 
             string baseAddress = "http://localhost:9000/";
@@ -27,7 +28,7 @@ namespace WinOcrFromConsoleUsingDllInvoke
             {
                 // Create HttpCient and make a request to api/values 
                 HttpClient client = new HttpClient();
-                
+                Console.WriteLine("Starting invoke...");
                 var response = UploadImage(baseAddress + "api/values", File.ReadAllBytes(png)).Result;
 
                 Console.WriteLine(response);
