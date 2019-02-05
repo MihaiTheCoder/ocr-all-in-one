@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WinOcrFromConsoleUsingDllInvoke
+namespace WindowsOcrWrapper.WinOcrResults
 {
     public partial class OcrResult
     {

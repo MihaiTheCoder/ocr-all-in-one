@@ -4,11 +4,12 @@ using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
 
-namespace WinOcrFromConsoleUsingDllInvoke.WinOcr
+namespace WindowsOcrWrapper.WinOcrResults
 {
     /// <summary>
     /// Needs to be singleton, as it's the class that makes sure that Ocr is not invoked in parallel
@@ -19,14 +20,25 @@ namespace WinOcrFromConsoleUsingDllInvoke.WinOcr
         PowerShell powershell;
         internal bool isOcrRunning = false;        
         TaskFactory factory;
-        public OcrExecutor(string pathToPowershell)
+        public OcrExecutor()
         {
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
             factory = new TaskFactory(taskScheduler);
             powershell = PowerShell.Create();
-            var psScript = File.ReadAllText(pathToPowershell);
-            powershell.AddScript(psScript);
+            var psScript = GetResourceText("Get-Text-Win-OCR.ps1");
+            powershell.AddScript(psScript, false);
             powershell.Invoke();
+        }
+
+        private string GetResourceText(string fileName)
+        {
+            var assembly = Assembly.GetExecutingAssembly();
+            var manifestName = assembly.GetManifestResourceNames().Single(man => man.EndsWith(fileName));
+            using (Stream stream = assembly.GetManifestResourceStream(manifestName))
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                return reader.ReadToEnd();
+            }
         }
 
         public Task<OcrResult> GetOcrResultAsync(string imagePath)

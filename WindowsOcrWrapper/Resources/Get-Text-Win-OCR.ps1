@@ -1,4 +1,5 @@
-﻿using namespace Windows.Storage
+﻿#initially taken from: https://github.com/HumanEquivalentUnit/PowerShell-Misc/blob/03cbe7deaa545a96e5102777877ac929c5b67a62/Get-Win10OcrTextFromImage.ps1
+using namespace Windows.Storage
 using namespace Windows.Graphics.Imaging
 
 # Add the WinRT assembly, and load the appropriate WinRT types
