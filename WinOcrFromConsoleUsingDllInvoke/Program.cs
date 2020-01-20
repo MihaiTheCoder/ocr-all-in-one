@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Microsoft.Owin.Hosting;
+using System;
 using System.IO;
-using System.Threading.Tasks;
-using WindowsOcrWrapper;
 using System.Linq;
-using Microsoft.Owin.Hosting;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Configuration;
+using System.Threading.Tasks;
+using WindowsOcrWrapper;
 
 namespace WinOcrFromConsoleUsingDllInvoke
 {
@@ -17,8 +16,9 @@ namespace WinOcrFromConsoleUsingDllInvoke
     class Program
     {
         static void Main(string[] args)
-        {            
-            var png = ConfigurationManager.AppSettings["ClocksFolder"] + @"\AAA_BXSP001_060.mxf_clock.png";
+        {
+            //var png = ConfigurationManager.AppSettings["ClocksFolder"] + @"\AAA_BXSP001_060.mxf_clock.png";
+            string png = @"E:\projects\WindowsOcrFromConsole\data\1341000-0_UCMR_6000011a1_1562654575151.jpg";
             //RunOcrForAllClocksInParallel();
 
             string baseAddress = "http://localhost:9000/";
