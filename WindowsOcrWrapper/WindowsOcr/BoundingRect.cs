@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace WindowsOcrWrapper.WinOcrResults
+namespace WindowsOcrWrapper.WindowsOcr
 {
     public class BoundingRect
     {

@@ -259,3 +259,5 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/ThirdPartyTools/tesseract-ocr-w64-setup-v5.0.0-alpha.20200328.exe
+/WindowsOcrWrapperTests/OcrExecutorTests.cs

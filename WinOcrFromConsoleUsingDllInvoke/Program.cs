@@ -7,6 +7,7 @@ using Microsoft.Owin.Hosting;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Configuration;
+using WindowsOcrWrapper.WindowsOcr;
 
 namespace WinOcrFromConsoleUsingDllInvoke
 {
@@ -41,7 +42,7 @@ namespace WinOcrFromConsoleUsingDllInvoke
         {
             var dir = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\";
             string[] files = Directory.GetFiles(dir).Where(f => f.EndsWith("png")).ToArray();
-            OcrExecutor ocrExecutor = new OcrExecutor();
+            WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor();
 
             Parallel.For(0, files.Length, async (i) =>
             {

@@ -5,6 +5,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
 using WindowsOcrWrapper;
+using WindowsOcrWrapper.WindowsOcr;
 
 namespace WinOcrFromConsoleUsingDllInvoke
 {
@@ -35,7 +36,7 @@ namespace WinOcrFromConsoleUsingDllInvoke
                 var buffer = await file.ReadAsByteArrayAsync();
                 string tempFileName = Path.GetTempFileName();
                 File.WriteAllBytes(tempFileName, buffer);
-                OcrExecutor ocrExecutor = new OcrExecutor();//TODO: Should be SINGLETON, created using DI Container
+                WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor();//TODO: Should be SINGLETON, created using DI Container
                 var ocrResult = await ocrExecutor.GetOcrResultAsync(tempFileName);
                 File.Delete(tempFileName);
                 return Ok(ocrResult);

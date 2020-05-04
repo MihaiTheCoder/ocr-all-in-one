@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WindowsOcrWrapper.WinOcrResults
+namespace WindowsOcrWrapper.WindowsOcr
 {
     public class OcrLine
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace WindowsOcrWrapper.WinOcrResults
+namespace WindowsOcrWrapper.WindowsOcr
 {
     public class OcrResult
     {
@@ -11,12 +11,13 @@ namespace WindowsOcrWrapper.WinOcrResults
         public static OcrResult FromDynamic(dynamic ocrResult)
         {
             var result = new OcrResult();
-            result.Text = ocrResult.Text;
             result.Lines = new List<OcrLine>();
             foreach (var line in ocrResult.Lines)
             {
                 result.Lines.Add(OcrLine.FromDynamic(line));
             }
+            result.Text = ocrResult.Text;
+            
             return result;
         }
         

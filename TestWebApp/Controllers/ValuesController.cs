@@ -6,6 +6,7 @@ using System.Net.Http;
 using System.Web;
 using System.Web.Http;
 using WindowsOcrWrapper;
+using WindowsOcrWrapper.WindowsOcr;
 
 namespace TestWebApp.Controllers
 {
@@ -41,7 +42,7 @@ namespace TestWebApp.Controllers
                 var postedFile = httpRequest.Files[file];
                 var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
                 postedFile.SaveAs(filePath);
-                OcrExecutor executor = new OcrExecutor();
+                WindowsOcrExecutor executor = new WindowsOcrExecutor();
                 var r = executor.GetOcrResult(filePath);
             }
 
