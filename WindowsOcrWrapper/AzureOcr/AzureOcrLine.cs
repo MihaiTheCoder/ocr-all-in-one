@@ -1,11 +1,22 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace WindowsOcrWrapper.AzureOcr
 {
     public class AzureOcrLine
     {
         public string BoundingBox { get; set; }
+
+        public int[] ParsedBoundingBox
+        {
+            get
+            {
+                if (string.IsNullOrWhiteSpace(BoundingBox))
+                    return new int[0];
+                return BoundingBox.Split(',').Select(b => int.Parse(b)).ToArray();
+            }
+        }
 
         public List<AzureOcrWord> Words { get; set; }
 

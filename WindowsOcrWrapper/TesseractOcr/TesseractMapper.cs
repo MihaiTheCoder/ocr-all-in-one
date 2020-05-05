@@ -10,6 +10,8 @@ namespace WindowsOcrWrapper.TesseractOcr
     public class TesseractResponse
     {
         public TesseractDetectionLine[] DetectionLines { get; set; }
+
+        public string Language { get; set; }
     }
     public class TesseractMapper
     {

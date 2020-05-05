@@ -68,8 +68,14 @@
     <Compile Include="AzureOcr\AzureOcrRegion.cs" />
     <Compile Include="AzureOcr\AzureOcrResults.cs" />
     <Compile Include="AzureOcr\AzureOcrWord.cs" />
+    <Compile Include="GenericOcrResponse.cs" />
+    <Compile Include="GoogleOcr\GoogleBoundingPoly.cs" />
+    <Compile Include="GoogleOcr\GoogleOcrResponse.cs" />
+    <Compile Include="GoogleOcr\GoogleOcrResponseMapper.cs" />
     <Compile Include="GoogleOcr\GoogleOcrService.cs" />
-    <Compile Include="IOcrExecutor.cs" />
+    <Compile Include="GoogleOcr\GoogleOcrSingleResponse.cs" />
+    <Compile Include="GoogleOcr\GoogleTextAnnotation.cs" />
+    <Compile Include="GoogleOcr\GoogleVertice.cs" />
     <Compile Include="LimitedConcurrencyLevelTaskScheduler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -79,6 +85,7 @@
     </Compile>
     <Compile Include="TesseractOcr\TesseractMapper.cs" />
     <Compile Include="TesseractOcr\TesseractService.cs" />
+    <Compile Include="UnifiedOcrEngineFactory.cs" />
     <Compile Include="WindowsOcr\BoundingRect.cs" />
     <Compile Include="WindowsOcr\WindowsOcrExecutor.cs" />
     <Compile Include="WindowsOcr\OcrLine.cs" />

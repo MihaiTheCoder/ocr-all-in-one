@@ -29,7 +29,7 @@ namespace WindowsOcrWrapper.AzureOcr
         /// the Computer Vision REST API.
         /// </summary>
         /// <param name="imageFilePath">The image file with printed text.</param>
-        public async Task<AzureOcrResults> GetOcrResultAsync(string imageFilePath)
+        public async Task<AzureOcrResults> GetOcrResultAsync(string imageFilePath, string language="unk")
         {
             try
             {
@@ -43,7 +43,7 @@ namespace WindowsOcrWrapper.AzureOcr
                 // method detects it automatically.
                 // The detectOrientation parameter is set to true, so the method detects and
                 // and corrects text orientation before detecting text.
-                string requestParameters = "language=unk&detectOrientation=true";
+                string requestParameters = $"language={language}&detectOrientation=true";
 
                 // Assemble the URI for the REST API method.
                 string uri = uriBase + "?" + requestParameters;

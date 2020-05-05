@@ -21,7 +21,7 @@ namespace WindowsOcrWrapper.AwsRekognitionOcr
             rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey);
         }
 
-        public async Task<AwsOcrResponse> GetOcrResultAsync(string filePath)
+        public async Task<AwsOcrResponse> GetOcrResultAsync(string filePath, string language=null)
         {
             MemoryStream ms = new MemoryStream();
 
@@ -29,7 +29,7 @@ namespace WindowsOcrWrapper.AwsRekognitionOcr
             {
                 fileStream.CopyTo(ms);                
             }
-            var request = new DetectTextRequest { Image = new Image() { Bytes = ms } };
+            var request = new DetectTextRequest { Image = new Image() { Bytes = ms }};
             DetectTextResponse result = await rekognitionClient.DetectTextAsync(request);
             return AwsResponseMapper.Get(result);
         }

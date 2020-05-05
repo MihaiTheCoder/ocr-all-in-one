@@ -35,7 +35,7 @@ namespace WindowsOcrWrapper.GoogleOcr
             this.apiToken = apiToken;
         }
 
-        public async Task<string> GetOcrResultAsync(string filePath)
+        public async Task<GoogleOcrResponse> GetOcrResultAsync(string filePath, string language=null)
         {
             byte[] bytes = File.ReadAllBytes(filePath);
             string base64Data = Convert.ToBase64String(bytes);
@@ -47,7 +47,7 @@ namespace WindowsOcrWrapper.GoogleOcr
             string url = $"{ocrPostUrl}?key={apiToken}";
             var response = await client.PostAsync(url, content);
             string contentString = await response.Content.ReadAsStringAsync();
-            return contentString;
+            return GoogleOcrResponseMapper.FromDynamic(JToken.Parse(contentString) as dynamic);            
         }
     }
 }

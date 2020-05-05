@@ -15,7 +15,7 @@ namespace WindowsOcrWrapper.WindowsOcr
     /// If you execute the sync method from multiple threads in parallel the powershell will complain because it was not developed to work in a multi threaded fashion.
     /// The Async API can be used from multiple threads, and it works fine as long as you have a single instance of OcrExecutor
     /// </summary>
-    public class WindowsOcrExecutor : IDisposable, IOcrExecutor
+    public class WindowsOcrExecutor : IDisposable
     {
         public static object lockObj = new object();
         PowerShell powershell;
@@ -52,7 +52,7 @@ namespace WindowsOcrWrapper.WindowsOcr
         /// </summary>
         /// <param name="imagePath"></param>
         /// <returns></returns>
-        public Task<OcrResult> GetOcrResultAsync(string imagePath)
+        public Task<WindowsOcrResult> GetOcrResultAsync(string imagePath, string language=null)
         {
             return factory.StartNew(() => { return GetOcrResult(imagePath); });
         }
@@ -64,12 +64,12 @@ namespace WindowsOcrWrapper.WindowsOcr
         /// <param name="imagePath"></param>
         /// <thre
         /// <returns></returns>
-        public OcrResult GetOcrResult(string imagePath)
+        public WindowsOcrResult GetOcrResult(string imagePath)
         {
             powershell.Commands.Clear();
             powershell.AddCommand("Get-Text-OCR").AddParameter("Path", imagePath);
             var result = powershell.Invoke();
-            var firstResult = OcrResult.FromDynamic(result[0] as dynamic);
+            var firstResult = WindowsOcrResult.FromDynamic(result[0] as dynamic);
             return firstResult;
         }
 
