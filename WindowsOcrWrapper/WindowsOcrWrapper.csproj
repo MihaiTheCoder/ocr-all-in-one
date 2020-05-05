@@ -55,7 +55,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aws\AwsOcrService.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsBoundingBox.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsGeometry.cs" />
+    <Compile Include="AwsRekognitionOcr\AWsOcrResponse.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsOcrService.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsPoint.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsResponseMapper.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsTextDetection.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsTextTypes.cs" />
     <Compile Include="AzureOcr\AzureOcrExecutor.cs" />
     <Compile Include="AzureOcr\AzureOcrLine.cs" />
     <Compile Include="AzureOcr\AzureOcrRegion.cs" />
@@ -70,7 +77,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Tessy\TesseractService.cs" />
+    <Compile Include="TesseractOcr\TesseractMapper.cs" />
+    <Compile Include="TesseractOcr\TesseractService.cs" />
     <Compile Include="WindowsOcr\BoundingRect.cs" />
     <Compile Include="WindowsOcr\WindowsOcrExecutor.cs" />
     <Compile Include="WindowsOcr\OcrLine.cs" />
