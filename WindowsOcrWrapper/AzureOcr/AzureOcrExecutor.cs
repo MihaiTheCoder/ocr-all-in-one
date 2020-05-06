@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper.AzureOcr
 {
-    public class AzureOcrExecutor
+    public class AzureOcrExecutor: IGenericOcrRunner
     {
         public AzureOcrExecutor(string subscriptionKey, string endpoint)
         {
@@ -24,6 +24,8 @@ namespace WindowsOcrWrapper.AzureOcr
         private readonly string subscriptionKey;
         private readonly string endpoint;
 
+        public string Name => nameof(AzureOcrExecutor);
+
         /// <summary>
         /// Gets the text visible in the specified image file by using
         /// the Computer Vision REST API.
@@ -31,6 +33,8 @@ namespace WindowsOcrWrapper.AzureOcr
         /// <param name="imageFilePath">The image file with printed text.</param>
         public async Task<AzureOcrResults> GetOcrResultAsync(string imageFilePath, string language="unk")
         {
+            if (language == null)
+                language = "unk";
             try
             {
                 HttpClient client = new HttpClient();
@@ -93,6 +97,11 @@ namespace WindowsOcrWrapper.AzureOcr
                 BinaryReader binaryReader = new BinaryReader(fileStream);
                 return binaryReader.ReadBytes((int)fileStream.Length);
             }
+        }
+
+        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
+        {
+            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }

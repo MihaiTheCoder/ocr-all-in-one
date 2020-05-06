@@ -12,9 +12,11 @@ namespace WindowsOcrWrapper.TesseractOcr
     /// Service to read texts from images through OCR Tesseract engine.
     /// http://diegogiacomelli.com.br/using-tesseract4-with-csharp/
     /// </summary>
-    public class TesseractService
+    public class TesseractService : IGenericOcrRunner
     {
         private readonly string _tesseractExePath;
+
+        public string Name => nameof(TesseractService);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TesseractService"/> class.
@@ -32,8 +34,11 @@ namespace WindowsOcrWrapper.TesseractOcr
             Environment.SetEnvironmentVariable("TESSDATA_PREFIX", dataDir);
         }
 
-        public async Task<TesseractResponse> GetText(string inputFilePath, string language)
+        public async Task<TesseractResponse> GetOcrResultAsync(string inputFilePath, string language)
         {
+            if (language == null)
+                language = "eng";
+
             var tempPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString());
             try
             {
@@ -96,6 +101,11 @@ namespace WindowsOcrWrapper.TesseractOcr
         private static string NewTempFileName(string tempPath)
         {
             return Path.Combine(tempPath, Guid.NewGuid().ToString());
+        }
+
+        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
+        {
+            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }

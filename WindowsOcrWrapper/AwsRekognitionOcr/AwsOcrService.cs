@@ -13,13 +13,15 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper.AwsRekognitionOcr
 {
-    public class AwsOcrService
+    public class AwsOcrService: IGenericOcrRunner
     {
         AmazonRekognitionClient rekognitionClient;
         public AwsOcrService(string accessKey, string secretKey)
         {
             rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey);
         }
+
+        public string Name => nameof(AwsOcrService);
 
         public async Task<AwsOcrResponse> GetOcrResultAsync(string filePath, string language=null)
         {
@@ -32,6 +34,11 @@ namespace WindowsOcrWrapper.AwsRekognitionOcr
             var request = new DetectTextRequest { Image = new Image() { Bytes = ms }};
             DetectTextResponse result = await rekognitionClient.DetectTextAsync(request);
             return AwsResponseMapper.Get(result);
+        }
+
+        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
+        {
+            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }

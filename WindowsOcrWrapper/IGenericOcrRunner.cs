@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper
 {
-    public class UnifiedOcrEngineFactory
+    public interface IGenericOcrRunner
     {
+        Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage=null);
 
+        string Name { get; }
     }
 }

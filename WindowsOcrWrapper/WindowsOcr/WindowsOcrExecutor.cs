@@ -15,12 +15,15 @@ namespace WindowsOcrWrapper.WindowsOcr
     /// If you execute the sync method from multiple threads in parallel the powershell will complain because it was not developed to work in a multi threaded fashion.
     /// The Async API can be used from multiple threads, and it works fine as long as you have a single instance of OcrExecutor
     /// </summary>
-    public class WindowsOcrExecutor : IDisposable
+    public class WindowsOcrExecutor : IDisposable, IGenericOcrRunner
     {
         public static object lockObj = new object();
         PowerShell powershell;
         internal bool isOcrRunning = false;
         TaskFactory factory;
+
+        public string Name => nameof(WindowsOcrExecutor);
+
         public WindowsOcrExecutor()
         {
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
@@ -76,6 +79,11 @@ namespace WindowsOcrWrapper.WindowsOcr
         public void Dispose()
         {
             powershell.Dispose();
+        }
+
+        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
+        {
+            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }

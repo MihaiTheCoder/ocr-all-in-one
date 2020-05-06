@@ -11,11 +11,13 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper.GoogleOcr
 {
-    public class GoogleOcrService
+    public class GoogleOcrService: IGenericOcrRunner
     {
         private readonly string apiToken;
 
         private const string ocrPostUrl = "https://vision.googleapis.com/v1/images:annotate";
+
+        public string Name => nameof(GoogleOcrService);
 
         public string GetBody(string base64Image)
         {
@@ -48,6 +50,11 @@ namespace WindowsOcrWrapper.GoogleOcr
             var response = await client.PostAsync(url, content);
             string contentString = await response.Content.ReadAsStringAsync();
             return GoogleOcrResponseMapper.FromDynamic(JToken.Parse(contentString) as dynamic);            
+        }
+
+        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
+        {
+            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }
