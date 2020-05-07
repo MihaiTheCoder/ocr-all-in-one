@@ -3,6 +3,7 @@ using System.IO;
 using System.Linq;
 using System.Management.Automation;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
 
@@ -22,6 +23,8 @@ namespace WindowsOcrWrapper.WindowsOcr
         internal bool isOcrRunning = false;
         TaskFactory factory;
         private readonly IOcrCache ocrCache;
+        internal StringBuilder debugPsOutput = new StringBuilder();
+
 
         public override string Name => nameof(WindowsOcrExecutor);
 
@@ -59,7 +62,7 @@ namespace WindowsOcrWrapper.WindowsOcr
         /// <returns></returns>
         public override Task<WindowsOcrResult> GetOcrResultWithoutCacheAsync(string imagePath, string language=null)
         {
-            return factory.StartNew(() => { return GetOcrResult(imagePath); });
+            return factory.StartNew(() => { return GetOcrResult(imagePath, language); });
         }
 
         /// <summary>
@@ -69,14 +72,53 @@ namespace WindowsOcrWrapper.WindowsOcr
         /// <param name="imagePath"></param>
         /// <thre
         /// <returns></returns>
-        public WindowsOcrResult GetOcrResult(string imagePath)
+        public WindowsOcrResult GetOcrResult(
+            string imagePath, 
+            string language, 
+            bool runAnywayWithBadLanguage=true)
         {
+
             powershell.Commands.Clear();
-            powershell.AddCommand("Get-Text-OCR").AddParameter("Path", imagePath);
+
+            powershell.Streams.Information.DataAdded += InformationHandler;
+            powershell.Streams.Verbose.DataAdded += InformationalRecordEventHandler<VerboseRecord>;
+            powershell.Streams.Debug.DataAdded += InformationalRecordEventHandler<DebugRecord>;
+            powershell.Streams.Warning.DataAdded += InformationalRecordEventHandler<WarningRecord>;
+
+
+            powershell.AddCommand("Get-Text-OCR")
+                      .AddParameter("Path", imagePath)
+                      .AddParameter("language", language)
+                      .AddParameter("runAnywayWithBadLanguage", runAnywayWithBadLanguage)
+                      .AddParameter("Verbose", true);
+
             var result = powershell.Invoke();
+
+            var debugOutput = debugPsOutput.ToString();
+
             var firstResult = WindowsOcrResult.FromDynamic(result[0] as dynamic);
             return firstResult;
         }
+
+        void InformationalRecordEventHandler<T>(object sender, DataAddedEventArgs e)
+        where T : InformationalRecord
+        {
+            var newRecord = ((PSDataCollection<T>)sender)[e.Index];
+            if (!string.IsNullOrEmpty(newRecord.Message))
+            {
+                debugPsOutput.AppendLine(newRecord.Message);
+            }
+        }
+
+        void InformationHandler(object sender, DataAddedEventArgs e)
+        {
+            var newRecord = ((PSDataCollection<InformationRecord>)sender)[e.Index];
+            if (newRecord?.MessageData != null)
+            {
+                debugPsOutput.AppendLine(newRecord.MessageData.ToString());
+            }
+        }
+
 
         public void Dispose()
         {

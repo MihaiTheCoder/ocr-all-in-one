@@ -2,6 +2,7 @@
 using namespace Windows.Storage
 using namespace Windows.Graphics.Imaging
 $ErrorActionPreference = "Stop"
+$VerbosePreference = "SilentlyContinue"
 # Add the WinRT assembly, and load the appropriate WinRT types
 Add-Type -AssemblyName System.Runtime.WindowsRuntime
 
@@ -10,19 +11,14 @@ $null = [Windows.Media.Ocr.OcrEngine,                Windows.Foundation,      Co
 $null = [Windows.Foundation.IAsyncOperation`1,       Windows.Foundation,      ContentType = WindowsRuntime]
 $null = [Windows.Graphics.Imaging.SoftwareBitmap,    Windows.Foundation,      ContentType = WindowsRuntime]
 $null = [Windows.Storage.Streams.RandomAccessStream, Windows.Storage.Streams, ContentType = WindowsRuntime]
-    
-    
-# [Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages
-$ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
-    
 
 # PowerShell doesn't have built-in support for Async operations, 
 # but all the WinRT methods are Async.
 # This function wraps a way to call those methods, and wait for their results.
 $getAwaiterBaseMethod = [WindowsRuntimeSystemExtensions].GetMember('GetAwaiter').
-                            Where({
-                                    $PSItem.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1'
-                                }, 'First')[0]
+                        Where({
+                                $PSItem.GetParameters()[0].ParameterType.Name -eq 'IAsyncOperation`1'
+                            }, 'First')[0]
 
 Function Await {
     param($AsyncTask, $ResultType)
@@ -33,12 +29,43 @@ Function Await {
         GetResult()
 }
 
-Function Get-Text-OCR {
-	param($Path)
+Function Show-SupportedLanguages {
+    [CmdletBinding()]
+    param($userLang)
 
+    Write-Verbose "The language $userLang is not supported"
+    Write-Verbose "Here is a list of possible languages for the OCR engine:"
+    [Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages | % { Write-Verbose $_.LanguageTag }
+}
+
+
+Function Get-Text-OCR {
+    [CmdletBinding()]
+	param($Path, [string]$language, [bool]$runAnywayWithBadLanguage=$false)
+
+    $lng = [Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages | ? {($_.LanguageTag -ieq $language) -or ($_.LanguageTag.Split("-")[0] -ieq $language) }
+    
+    if ($lng -eq $null)
+    {
+        if (-not $runAnywayWithBadLanguage) 
+        {
+            Show-SupportedLanguages -userLang $language
+            return
+        }
+        else 
+        {
+            $ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
+        }
+    }
+    else
+    {
+        $ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromLanguage($lng)
+    }
+
+    
+    
 	foreach ($p in $Path)
 	{
-      
 		# From MSDN, the necessary steps to load an image are:
 		# Call the OpenAsync method of the StorageFile object to get a random access stream containing the image data.
 		# Call the static method BitmapDecoder.CreateAsync to get an instance of the BitmapDecoder class for the specified stream. 
@@ -78,6 +105,5 @@ Function Get-Text-OCR {
 
 		# Run the OCR
 		Await $ocrEngine.RecognizeAsync($softwareBitmap) ([Windows.Media.Ocr.OcrResult])
-
 	}
 }
