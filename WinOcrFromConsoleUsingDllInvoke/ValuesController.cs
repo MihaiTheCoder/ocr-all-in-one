@@ -36,7 +36,7 @@ namespace WinOcrFromConsoleUsingDllInvoke
                 var buffer = await file.ReadAsByteArrayAsync();
                 string tempFileName = Path.GetTempFileName();
                 File.WriteAllBytes(tempFileName, buffer);
-                WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor();//TODO: Should be SINGLETON, created using DI Container
+                WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor(new NoOpOcrCache());//TODO: Should be SINGLETON, created using DI Container
                 var ocrResult = await ocrExecutor.GetOcrResultAsync(tempFileName);
                 File.Delete(tempFileName);
                 return Ok(ocrResult);

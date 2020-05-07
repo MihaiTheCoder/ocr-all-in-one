@@ -11,13 +11,18 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper.GoogleOcr
 {
-    public class GoogleOcrService: IGenericOcrRunner
+    public class GoogleOcrService: GenericOcrRunner<GoogleOcrResponse>
     {
         private readonly string apiToken;
 
         private const string ocrPostUrl = "https://vision.googleapis.com/v1/images:annotate";
 
-        public string Name => nameof(GoogleOcrService);
+        public override string Name => nameof(GoogleOcrService);
+
+        public GoogleOcrService(IOcrCache ocrCache, string apiToken): base(ocrCache)
+        {
+            this.apiToken = apiToken;
+        }
 
         public string GetBody(string base64Image)
         {
@@ -32,12 +37,7 @@ namespace WindowsOcrWrapper.GoogleOcr
             return json;
         }
 
-        public GoogleOcrService(string apiToken)
-        {
-            this.apiToken = apiToken;
-        }
-
-        public async Task<GoogleOcrResponse> GetOcrResultAsync(string filePath, string language=null)
+        public override async Task<GoogleOcrResponse> GetOcrResultWithoutCacheAsync(string filePath, string language=null)
         {
             byte[] bytes = File.ReadAllBytes(filePath);
             string base64Data = Convert.ToBase64String(bytes);
@@ -50,11 +50,6 @@ namespace WindowsOcrWrapper.GoogleOcr
             var response = await client.PostAsync(url, content);
             string contentString = await response.Content.ReadAsStringAsync();
             return GoogleOcrResponseMapper.FromDynamic(JToken.Parse(contentString) as dynamic);            
-        }
-
-        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
-        {
-            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }

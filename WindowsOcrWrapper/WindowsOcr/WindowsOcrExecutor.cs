@@ -15,16 +15,17 @@ namespace WindowsOcrWrapper.WindowsOcr
     /// If you execute the sync method from multiple threads in parallel the powershell will complain because it was not developed to work in a multi threaded fashion.
     /// The Async API can be used from multiple threads, and it works fine as long as you have a single instance of OcrExecutor
     /// </summary>
-    public class WindowsOcrExecutor : IDisposable, IGenericOcrRunner
+    public class WindowsOcrExecutor : GenericOcrRunner<WindowsOcrResult>, IDisposable
     {
         public static object lockObj = new object();
         PowerShell powershell;
         internal bool isOcrRunning = false;
         TaskFactory factory;
+        private readonly IOcrCache ocrCache;
 
-        public string Name => nameof(WindowsOcrExecutor);
+        public override string Name => nameof(WindowsOcrExecutor);
 
-        public WindowsOcrExecutor()
+        public WindowsOcrExecutor(IOcrCache ocrCache): base(ocrCache)
         {
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
             factory = new TaskFactory(taskScheduler);
@@ -32,6 +33,7 @@ namespace WindowsOcrWrapper.WindowsOcr
             string psScript = GetResourceText("Get-Text-Win-OCR.ps1");
             powershell.AddScript(psScript, false);
             powershell.Invoke();
+            this.ocrCache = ocrCache;
         }
 
         /// <summary>
@@ -55,7 +57,7 @@ namespace WindowsOcrWrapper.WindowsOcr
         /// </summary>
         /// <param name="imagePath"></param>
         /// <returns></returns>
-        public Task<WindowsOcrResult> GetOcrResultAsync(string imagePath, string language=null)
+        public override Task<WindowsOcrResult> GetOcrResultWithoutCacheAsync(string imagePath, string language=null)
         {
             return factory.StartNew(() => { return GetOcrResult(imagePath); });
         }
@@ -79,11 +81,6 @@ namespace WindowsOcrWrapper.WindowsOcr
         public void Dispose()
         {
             powershell.Dispose();
-        }
-
-        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
-        {
-            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }

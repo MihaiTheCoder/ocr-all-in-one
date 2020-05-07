@@ -10,15 +10,23 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper
 {
-    public class OcrCache
+    public class FileStorageOcrCache : IOcrCache
     {
         private readonly IFileStorage fileStorage;
-        private readonly string rootDirectory;
 
-        public OcrCache(IFileStorage fileStorage, string rootDirectory)
+        public FileStorageOcrCache(string rootDirectory): this(GetDefaultStorage(rootDirectory))
+        {
+
+        }
+
+        public FileStorageOcrCache(IFileStorage fileStorage)
         {
             this.fileStorage = fileStorage;
-            this.rootDirectory = rootDirectory;
+        }
+
+        public static IFileStorage GetDefaultStorage(string rootDirectory)
+        {
+            return new FolderFileStorage(new FolderFileStorageOptions { Folder = rootDirectory });
         }
 
         public async Task<bool> IsFileInCache(string inputFilePath, string ocrEngineName)
@@ -52,18 +60,25 @@ namespace WindowsOcrWrapper
 
         private string GetFilePath(string ocrEngineName, string encodedHash)
         {
-            return Path.Combine(rootDirectory, ocrEngineName, encodedHash);
+            return Path.Combine(ocrEngineName, encodedHash);
         }
 
         private string GetEncodedHashFromFile(string filePath)
         {
-            using (var md5 = MD5.Create())
+            using (var hashAlgorithm = SHA256.Create())
             {
                 using (var stream = File.OpenRead(filePath))
                 {
-                    return Encoding.Default.GetString(md5.ComputeHash(stream));
+                    var hashResult = hashAlgorithm.ComputeHash(stream);
+                    return ByteArrayToHexStringViaBitConverter(hashResult);                   
                 }
             }
+        }
+
+        static string ByteArrayToHexStringViaBitConverter(byte[] bytes)
+        {
+            string hex = BitConverter.ToString(bytes);
+            return hex.Replace("-", "");
         }
 
     }

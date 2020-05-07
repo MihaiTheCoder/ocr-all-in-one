@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WindowsOcrWrapper.AzureOcr
 {
-    public class AzureOcrResults
+    public class AzureOcrResults : IMappableToGenericResponse
     {
         public string Language { get; set; }
 
@@ -29,6 +29,41 @@ namespace WindowsOcrWrapper.AzureOcr
             }
             
             return azureOcrResults;
+        }
+
+        public GenericOcrResponse Map()
+        {
+            return Map(this);
+        }
+
+        public static GenericOcrResponse Map(AzureOcrResults azureOcrResults)
+        {
+            return new GenericOcrResponse
+            {
+                Detections = azureOcrResults.Regions.SelectMany(r => r.Lines).SelectMany(l => l.Words).Select(w => Get(w)).ToList(),
+                Language = azureOcrResults.Language,
+                SummaryText = string.Join(Environment.NewLine, azureOcrResults.Regions.Select(r => GetText(r)))
+            };
+        }
+
+        private static string GetText(AzureOcrRegion r)
+        {
+            return string.Join(Environment.NewLine, r.Lines.Select(l => string.Join(" ", l.Words.Select(w => w.Text))));
+        }
+
+        private static GenericBoxDetection Get(AzureOcrWord word)
+        {
+            return new GenericBoxDetection
+            {
+                DetectedText = word.Text,
+                BoundingBox = new GenericBoundingBox
+                {
+                    Height = word.BoundingBox[0],
+                    Width = word.BoundingBox[1],
+                    Left = word.BoundingBox[2],
+                    Top = word.BoundingBox[3],
+                }
+            };
         }
     }
 }

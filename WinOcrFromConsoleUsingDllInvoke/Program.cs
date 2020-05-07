@@ -42,7 +42,7 @@ namespace WinOcrFromConsoleUsingDllInvoke
         {
             var dir = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\";
             string[] files = Directory.GetFiles(dir).Where(f => f.EndsWith("png")).ToArray();
-            WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor();
+            WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor(new NoOpOcrCache());
 
             Parallel.For(0, files.Length, async (i) =>
             {

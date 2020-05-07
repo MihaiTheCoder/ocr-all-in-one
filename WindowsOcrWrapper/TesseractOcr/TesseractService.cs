@@ -12,18 +12,18 @@ namespace WindowsOcrWrapper.TesseractOcr
     /// Service to read texts from images through OCR Tesseract engine.
     /// http://diegogiacomelli.com.br/using-tesseract4-with-csharp/
     /// </summary>
-    public class TesseractService : IGenericOcrRunner
+    public class TesseractService : GenericOcrRunner<TesseractResponse>
     {
         private readonly string _tesseractExePath;
 
-        public string Name => nameof(TesseractService);
+        public override string Name => nameof(TesseractService);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TesseractService"/> class.
         /// </summary>
         /// <param name="tesseractDir">The path for the Tesseract4 installation folder (C:\Program Files\Tesseract-OCR).</param>        
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
-        public TesseractService(string tesseractDir= @"C:\Program Files\Tesseract-OCR", string dataDir = null)
+        public TesseractService(IOcrCache ocrCache, string tesseractDir= @"C:\Program Files\Tesseract-OCR", string dataDir = null): base(ocrCache)
         {
             // Tesseract configs.
             _tesseractExePath = Path.Combine(tesseractDir, "tesseract.exe");            
@@ -34,7 +34,7 @@ namespace WindowsOcrWrapper.TesseractOcr
             Environment.SetEnvironmentVariable("TESSDATA_PREFIX", dataDir);
         }
 
-        public async Task<TesseractResponse> GetOcrResultAsync(string inputFilePath, string language)
+        public override async Task<TesseractResponse> GetOcrResultWithoutCacheAsync(string inputFilePath, string language)
         {
             if (language == null)
                 language = "eng";
@@ -101,11 +101,6 @@ namespace WindowsOcrWrapper.TesseractOcr
         private static string NewTempFileName(string tempPath)
         {
             return Path.Combine(tempPath, Guid.NewGuid().ToString());
-        }
-
-        public async Task<GenericOcrResponse> RunAsync(string inputImage, string inputLanguage = null)
-        {
-            return await GetOcrResultAsync(inputImage, inputLanguage);
         }
     }
 }
