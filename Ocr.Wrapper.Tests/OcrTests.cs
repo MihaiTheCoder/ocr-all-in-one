@@ -10,7 +10,7 @@ using Ocr.Wrapper.GoogleOcr;
 using Ocr.Wrapper.AwsRekognitionOcr;
 using System.Configuration;
 
-namespace WindowsOcrWrapper.Tests
+namespace Ocr.Wrapper.Tests
 {
     [TestClass()]
     public class OcrTests
