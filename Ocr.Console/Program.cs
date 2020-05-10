@@ -18,12 +18,9 @@ namespace OcrFromConsole
     class Program
     {
         static void Main(string[] args)
-        {            
-            var png = ConfigurationManager.AppSettings["ClocksFolder"] + @"\AAA_BXSP001_060.mxf_clock.png";
-            //RunOcrForAllClocksInParallel();
-
+        {
             string baseAddress = "http://localhost:9000/";
-
+            var png = @"Data/abc.JPG";
             // Start OWIN host 
             using (WebApp.Start<Startup>(url: baseAddress))
             {
@@ -36,21 +33,6 @@ namespace OcrFromConsole
                 Console.WriteLine(response.Content.ReadAsStringAsync().Result);
                 Console.ReadLine();
             }
-        }
-
-        private static void RunOcrForAllClocksInParallel()
-        {
-            var dir = @"C:\Users\mihai.petrutiu\Downloads\clocks\clocks\";
-            string[] files = Directory.GetFiles(dir).Where(f => f.EndsWith("png")).ToArray();
-            WindowsOcrExecutor ocrExecutor = new WindowsOcrExecutor(new NoOpOcrCache());
-
-            Parallel.For(0, files.Length, async (i) =>
-            {
-                var result = await ocrExecutor.GetOcrResultAsync(files[i]);
-                Console.WriteLine(result.Text);
-                Console.WriteLine(i);
-            });
-            Console.ReadKey();
         }
 
         static async public Task<HttpResponseMessage> UploadImage(string url, byte[] ImageData)
