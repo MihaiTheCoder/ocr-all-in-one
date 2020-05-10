@@ -19,6 +19,11 @@ namespace Ocr.Wrapper.GoogleOcr
 
         public override string Name => nameof(GoogleOcrService);
 
+        public GoogleOcrService(string apiToken): this(new NoOpOcrCache(), apiToken)
+        {
+
+        }
+
         public GoogleOcrService(IOcrCache ocrCache, string apiToken): base(ocrCache)
         {
             this.apiToken = apiToken;

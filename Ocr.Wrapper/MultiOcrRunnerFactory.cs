@@ -8,7 +8,6 @@ using Ocr.Wrapper.AzureOcr;
 using Ocr.Wrapper.GoogleOcr;
 using Ocr.Wrapper.TesseractOcr;
 using Ocr.Wrapper.WindowsOcr;
-using static Ocr.Wrapper.MultiOcrRunner;
 
 namespace Ocr.Wrapper
 {
@@ -21,6 +20,11 @@ namespace Ocr.Wrapper
             this(settings, new FileStorageOcrCache(cacheRootDirectory))
         {
             
+        }
+
+        public StandardMultiOcrRunnerFactory(StandardOcrSettings settings): this(settings, new NoOpOcrCache())
+        {
+
         }
 
         public StandardMultiOcrRunnerFactory(StandardOcrSettings settings, IOcrCache ocrCache)

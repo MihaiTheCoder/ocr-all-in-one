@@ -28,6 +28,11 @@ namespace Ocr.Wrapper.WindowsOcr
 
         public override string Name => nameof(WindowsOcrExecutor);
 
+        public WindowsOcrExecutor(): this(new NoOpOcrCache())
+        {
+
+        }
+
         public WindowsOcrExecutor(IOcrCache ocrCache): base(ocrCache)
         {
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);

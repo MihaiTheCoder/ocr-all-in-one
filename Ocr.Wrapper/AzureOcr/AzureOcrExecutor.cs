@@ -12,6 +12,10 @@ namespace Ocr.Wrapper.AzureOcr
 {
     public class AzureOcrExecutor: GenericOcrRunner<AzureOcrResults>
     {
+        public AzureOcrExecutor(string subscriptionKey, string endpoint): this(new NoOpOcrCache(), subscriptionKey, endpoint)
+        {
+
+        }
         public AzureOcrExecutor(IOcrCache ocrCache, string subscriptionKey, string endpoint): base(ocrCache)
         {
             this.subscriptionKey = subscriptionKey;
