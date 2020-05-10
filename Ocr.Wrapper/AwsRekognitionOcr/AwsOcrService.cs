@@ -16,6 +16,12 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
     public class AwsOcrService: GenericOcrRunner<AwsOcrResponse>
     {
         AmazonRekognitionClient rekognitionClient;
+
+        public AwsOcrService(string accessKey, string secretKey): this(new NoOpOcrCache(), accessKey, secretKey)
+        {
+
+        }
+        
         public AwsOcrService(IOcrCache ocrCache, string accessKey, string secretKey): base(ocrCache)
         {
             rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey);
