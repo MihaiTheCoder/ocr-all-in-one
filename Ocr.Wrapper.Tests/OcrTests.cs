@@ -3,14 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.IO;
 using Ocr.Wrapper.AzureOcr;
-using Ocr.Wrapper;
 using Ocr.Wrapper.WindowsOcr;
 using Ocr.Wrapper.TesseractOcr;
 using Ocr.Wrapper.GoogleOcr;
 using Ocr.Wrapper.AwsRekognitionOcr;
 using System.Configuration;
 
-namespace WindowsOcrWrapper.Tests
+namespace Ocr.Wrapper.Tests
 {
     [TestClass()]
     public class OcrTests
