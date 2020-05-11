@@ -38,6 +38,7 @@ Function Show-SupportedLanguages {
     [Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages | % { Write-Verbose $_.LanguageTag }
 }
 
+$memo = @{}
 
 Function Get-Text-OCR {
     [CmdletBinding()]
@@ -54,12 +55,22 @@ Function Get-Text-OCR {
         }
         else 
         {
-            $ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
+            if ($memo.ContainsKey("UserProfileLanguages")) {
+                $ocrEngine = $memo["UserProfileLanguages"]
+            } else {
+                $ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromUserProfileLanguages()
+                $memo.Add("UserProfileLanguages", $ocrEngine)
+            }
         }
     }
     else
     {
-        $ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromLanguage($lng)
+        if ($memo.ContainsKey($lng.LanguageTag)) {
+                $ocrEngine = $memo[$lng.LanguageTag]
+            } else {
+                $ocrEngine = [Windows.Media.Ocr.OcrEngine]::TryCreateFromLanguage($lng)
+                $memo.Add($lng.LanguageTag, $ocrEngine)
+            }
     }
 
     

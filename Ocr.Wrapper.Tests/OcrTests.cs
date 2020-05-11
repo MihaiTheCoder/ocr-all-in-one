@@ -40,7 +40,7 @@ namespace Ocr.Wrapper.Tests
         }
 
         [TestMethod]
-        public async Task Tesseract4()
+        public async Task Tesseract5()
         {
             TesseractService tesseractService = new TesseractService();
             var result = await tesseractService.GetOcrResultAsync(@"data/abc.JPG", "eng");
