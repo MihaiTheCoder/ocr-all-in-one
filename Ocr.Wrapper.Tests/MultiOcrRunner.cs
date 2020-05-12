@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Threading.Tasks;
+using Ocr.Wrapper.TesseractOcr;
 
 namespace Ocr.Wrapper.Tests
 {
@@ -19,7 +20,7 @@ namespace Ocr.Wrapper.Tests
         #region Additional test attributes
 
         [TestInitialize()]
-        public void MultiOcrRunnerTestInitialize() 
+        public async Task MultiOcrRunnerTestInitialize() 
         {
             StandardOcrSettings standardOcrSettings = new StandardOcrSettings
             {
@@ -27,7 +28,7 @@ namespace Ocr.Wrapper.Tests
                 WindowsOcrSettings = new WindowsOcrSettings()
             };
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
-            multiOcrRunner = new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath).GetMultiOcrRunner();
+            multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath).GetMultiOcrRunner();
         }
         
         #endregion
@@ -39,6 +40,6 @@ namespace Ocr.Wrapper.Tests
             var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath);
 
             Assert.IsNotNull(result);
-        }
+        }        
     }
 }

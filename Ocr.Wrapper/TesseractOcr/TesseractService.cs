@@ -21,9 +21,9 @@ namespace Ocr.Wrapper.TesseractOcr
         /// <summary>
         /// Initializes a new instance of the <see cref="TesseractService"/> class.
         /// </summary>
-        /// <param name="tesseractDir">The path for the Tesseract4 installation folder (C:\Program Files\Tesseract-OCR).</param>        
+        /// <param name="tesseractDir">The path for the Tesseract4 installation folder using our own installer, or using the standard installer (C:\Program Files\Tesseract-OCR).</param>        
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
-        public TesseractService(string tesseractDir = @"C:\Program Files\Tesseract-OCR", string dataDir = null): this(new NoOpOcrCache(), tesseractDir, dataDir)
+        public TesseractService(string tesseractDir = TesseractInstaller.DefaultInstallDir, string dataDir = null): this(new NoOpOcrCache(), tesseractDir, dataDir)
         {
 
         }
@@ -31,9 +31,9 @@ namespace Ocr.Wrapper.TesseractOcr
         /// <summary>
         /// Initializes a new instance of the <see cref="TesseractService"/> class.
         /// </summary>
-        /// <param name="tesseractDir">The path for the Tesseract4 installation folder (C:\Program Files\Tesseract-OCR).</param>        
+        /// <param name="tesseractDir">The path for the Tesseract4 installation folder using our own installer, or using the standard installer (C:\Program Files\Tesseract-OCR).</param>        
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
-        public TesseractService(IOcrCache ocrCache, string tesseractDir= @"C:\Program Files\Tesseract-OCR", string dataDir = null): base(ocrCache)
+        public TesseractService(IOcrCache ocrCache, string tesseractDir= TesseractInstaller.DefaultInstallDir, string dataDir = null) : base(ocrCache)
         {
             // Tesseract configs.
             _tesseractExePath = Path.Combine(tesseractDir, "tesseract.exe");            

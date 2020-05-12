@@ -70,6 +70,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Teseract.cs" />
+    <Compile Include="TesseractInstallerTests.cs" />
     <Compile Include="WindowsOcrExecutorTests.cs" />
   </ItemGroup>
   <ItemGroup>
