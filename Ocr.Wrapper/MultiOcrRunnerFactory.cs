@@ -33,13 +33,14 @@ namespace Ocr.Wrapper
             this.ocrCache = ocrCache;
         }
 
-        public MultiOcrRunner GetMultiOcrRunner()
+        public async Task<MultiOcrRunner> GetMultiOcrRunner()
         {
-            return new MultiOcrRunner(GetStandardOcrs(ocrCache, settings).ToArray());
+            var standardOcrs = await GetStandardOcrs(ocrCache, settings);
+            return new MultiOcrRunner(standardOcrs.ToArray());
         }
 
 
-        public static List<IGenericOcrRunner> GetStandardOcrs(IOcrCache ocrCache, StandardOcrSettings standardOcrSettings)
+        public static async Task<List<IGenericOcrRunner>> GetStandardOcrs(IOcrCache ocrCache, StandardOcrSettings standardOcrSettings)
         {
             List<IGenericOcrRunner> genericOcrRunners = new List<IGenericOcrRunner>();
 
@@ -62,8 +63,14 @@ namespace Ocr.Wrapper
             }
 
             if (standardOcrSettings.TesseractOcrSettings != null)
-            {
+            {                
                 var tesseractSettings = standardOcrSettings.TesseractOcrSettings;
+                if (tesseractSettings.ShouldTryToAutomaticallInstall)
+                {
+                    ITesseractInstaller tesseractInstaller = new TesseractInstaller(tesseractSettings.TesseractDir);
+                    await tesseractInstaller.Install();
+                    tesseractSettings.Installer = tesseractInstaller;
+                }
                 genericOcrRunners.Add(new TesseractService(ocrCache, tesseractSettings.TesseractDir, tesseractSettings.DataDir));
             }
 

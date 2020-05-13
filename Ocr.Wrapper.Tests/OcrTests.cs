@@ -79,7 +79,7 @@ namespace Ocr.Wrapper.Tests
         {
             StandardOcrSettings standardOcrSettings = GetStandardOcrSettings();
 
-            MultiOcrRunner genericOcrRunner = new StandardMultiOcrRunnerFactory(standardOcrSettings)
+            MultiOcrRunner genericOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings)
                 .GetMultiOcrRunner();
             var results = await genericOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
             Assert.IsNotNull(results);
@@ -91,7 +91,7 @@ namespace Ocr.Wrapper.Tests
             StandardOcrSettings standardOcrSettings = GetStandardOcrSettings();
 
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
-            MultiOcrRunner multiOcrRunner = new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath)
+            MultiOcrRunner multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath)
                 .GetMultiOcrRunner();
             var results = await multiOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
             Assert.IsNotNull(results);

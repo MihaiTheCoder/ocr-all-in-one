@@ -69,6 +69,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TesseractInstallerTests.cs" />
     <Compile Include="WindowsOcrExecutorTests.cs" />
   </ItemGroup>
   <ItemGroup>

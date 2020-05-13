@@ -62,6 +62,12 @@
       <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Management.Automation.dll.10.0.10586.0\lib\net40\System.Management.Automation.dll</HintPath>
     </Reference>
@@ -132,7 +138,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StandardOcrSettings.cs" />
+    <Compile Include="TesseractOcr\ITesseractInstaller.cs" />
     <Compile Include="TesseractOcr\TesseractDetectionLine.cs" />
+    <Compile Include="TesseractOcr\TesseractInstaller.cs" />
     <Compile Include="TesseractOcr\TesseractMapper.cs" />
     <Compile Include="TesseractOcr\TesseractResponse.cs" />
     <Compile Include="TesseractOcr\TesseractService.cs" />
