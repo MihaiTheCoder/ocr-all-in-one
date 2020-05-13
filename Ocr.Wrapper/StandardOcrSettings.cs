@@ -1,4 +1,5 @@
-﻿using Ocr.Wrapper.TesseractOcr;
+﻿using Ocr.Wrapper.ImageManipulation;
+using Ocr.Wrapper.TesseractOcr;
 using System;
 using System.IO;
 
@@ -6,7 +7,18 @@ namespace Ocr.Wrapper
 {
     public class StandardOcrSettings
     {
+        public StandardOcrSettings(bool useStandardImageCompressor=false)
+        {
+            if (useStandardImageCompressor)
+                ImageCompressor = new ImageMagickCompressor(false);
+        }
+
+        public StandardOcrSettings(IImageCompressor imageCompressor)
+        {
+            ImageCompressor = imageCompressor;
+        }
         public AzureOcrSettings AzureOcrSettings { get; set; }
+
         public AwsOcrSettings AwsOcrSettings { get; set; }
 
         public GoogleOcrSettings GoogleOcrSettings { get; set; }
@@ -14,6 +26,7 @@ namespace Ocr.Wrapper
         public TesseractOcrSettings TesseractOcrSettings { get; set; }
 
         public WindowsOcrSettings WindowsOcrSettings { get; set; }
+        public IImageCompressor ImageCompressor { get; }
     }
 
     public class AzureOcrSettings

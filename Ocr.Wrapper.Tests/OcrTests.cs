@@ -104,7 +104,7 @@ namespace Ocr.Wrapper.Tests
             var googleApiToken = ConfigurationManager.AppSettings["googleApiToken"];
             var awsAcessKey = ConfigurationManager.AppSettings["awsAccessKey"];
             var awsSecretKey = ConfigurationManager.AppSettings["awsSecretKey"];
-            StandardOcrSettings standardOcrSettings = new StandardOcrSettings
+            StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {
                 AwsOcrSettings = new AwsOcrSettings(awsAcessKey, awsSecretKey),
                 AzureOcrSettings = new AzureOcrSettings(azureSubscriptionKey, azureEndpoint),

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Ocr.Wrapper;
 using Ocr.Wrapper.WindowsOcr;
 
 namespace Ocr.Wrapper.Tests

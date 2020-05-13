@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Linq;
+using Ocr.Wrapper.ImageManipulation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,7 +17,7 @@ namespace Ocr.Wrapper.AzureOcr
         {
 
         }
-        public AzureOcrExecutor(IOcrCache ocrCache, string subscriptionKey, string endpoint): base(ocrCache)
+        public AzureOcrExecutor(IOcrCache ocrCache, string subscriptionKey, string endpoint, IImageCompressor imageCompressor=null): base(ocrCache, imageCompressor)
         {
             this.subscriptionKey = subscriptionKey;
             this.endpoint = endpoint;

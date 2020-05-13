@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ocr.Wrapper.ImageManipulation;
+using System;
 using System.IO;
 using System.Linq;
 using System.Management.Automation;
@@ -33,7 +34,7 @@ namespace Ocr.Wrapper.WindowsOcr
 
         }
 
-        public WindowsOcrExecutor(IOcrCache ocrCache): base(ocrCache)
+        public WindowsOcrExecutor(IOcrCache ocrCache, IImageCompressor imageCompressor=null) : base(ocrCache, imageCompressor)
         {
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
             factory = new TaskFactory(taskScheduler);

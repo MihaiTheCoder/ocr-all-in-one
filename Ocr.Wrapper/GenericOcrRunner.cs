@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ocr.Wrapper.ImageManipulation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,10 +10,12 @@ namespace Ocr.Wrapper
     public abstract class GenericOcrRunner<T> : IGenericOcrRunner<T> where T : IMappableToGenericResponse
     {
         private readonly IOcrCache ocrCache;
+        private readonly IImageCompressor imageCompressor;
 
-        public GenericOcrRunner(IOcrCache ocrCache)
+        public GenericOcrRunner(IOcrCache ocrCache, IImageCompressor imageCompressor)
         {
             this.ocrCache = ocrCache;
+            this.imageCompressor = imageCompressor;
         }
         public abstract string Name { get; }
 
@@ -20,6 +23,9 @@ namespace Ocr.Wrapper
        
         public async Task<T> GetOcrResultAsync(string inputImage, string inputLanguage = null)
         {
+            if (imageCompressor != null)
+                inputImage = imageCompressor.CompressInPlace(inputImage);
+
             var cacheResult = await ocrCache.GetFromCache<T>(inputImage, Name);
             
             if (cacheResult.Item1)

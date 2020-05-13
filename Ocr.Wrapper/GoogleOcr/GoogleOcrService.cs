@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Ocr.Wrapper.ImageManipulation;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -24,7 +25,7 @@ namespace Ocr.Wrapper.GoogleOcr
 
         }
 
-        public GoogleOcrService(IOcrCache ocrCache, string apiToken): base(ocrCache)
+        public GoogleOcrService(IOcrCache ocrCache, string apiToken, IImageCompressor imageCompressor=null) : base(ocrCache, imageCompressor)
         {
             this.apiToken = apiToken;
         }

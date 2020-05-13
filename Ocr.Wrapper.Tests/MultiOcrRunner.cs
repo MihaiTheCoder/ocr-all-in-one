@@ -22,7 +22,7 @@ namespace Ocr.Wrapper.Tests
         [TestInitialize()]
         public async Task MultiOcrRunnerTestInitialize() 
         {
-            StandardOcrSettings standardOcrSettings = new StandardOcrSettings
+            StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {
                 TesseractOcrSettings = new TesseractOcrSettings(),
                 WindowsOcrSettings = new WindowsOcrSettings()
