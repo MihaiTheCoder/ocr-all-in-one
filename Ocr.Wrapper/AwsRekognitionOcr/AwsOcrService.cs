@@ -2,6 +2,7 @@
 using Amazon.Rekognition.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Ocr.Wrapper.ImageManipulation;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -22,7 +23,7 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
 
         }
         
-        public AwsOcrService(IOcrCache ocrCache, string accessKey, string secretKey): base(ocrCache)
+        public AwsOcrService(IOcrCache ocrCache, string accessKey, string secretKey, IImageCompressor imageCompressor=null): base(ocrCache, imageCompressor)
         {
             rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey);
         }
