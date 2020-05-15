@@ -96,7 +96,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
-    <Compile Include="ValuesController.cs" />
+    <Compile Include="OcrController.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

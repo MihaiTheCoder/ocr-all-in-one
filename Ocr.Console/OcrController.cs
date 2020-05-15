@@ -10,7 +10,7 @@ using Ocr.Wrapper.WindowsOcr;
 namespace OcrFromConsole
 {
     //[Authorize]
-    public class ValuesController : ApiController
+    public class OcrController : ApiController
     {
         public async Task<IHttpActionResult> Post()
         {
