@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Ocr.Wrapper</id>
+    <version>1.0.0</version>
+    <authors>Petrutiu family</authors>
+    <owners>Petrutiu family</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/MihaiTheCoder/ocr-all-in-one</projectUrl>
+    <iconUrl></iconUrl>
+    <description>A package that helps to use all common OCRs (Windows, Tesseract, Azure, AWS, Google)</description>
+    <releaseNotes>Initial release</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags>OCR AWS Google Tesseract Windows Azure</tags>
+    <dependencies>
+      <group targetFramework=".NETStandard2.1">
+        <dependency id="SampleDependency" version="1.0.0" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>
