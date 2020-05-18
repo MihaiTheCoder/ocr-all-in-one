@@ -24,7 +24,7 @@ jobs:
       run: msbuild Ocr.sln /p:Configuration=Release    
 
     - name: Generate nuget package
-      run: nuget pack Ocr.Wrapper
+      run: nuget pack Ocr.Wrapper -Properties Configuration=Release
 
     # Publish
     - name: publish on version change
