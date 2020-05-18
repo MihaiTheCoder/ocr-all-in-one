@@ -1,4 +1,6 @@
-﻿namespace Ocr.Wrapper
+﻿using System.Configuration;
+
+namespace Ocr.Wrapper
 {
     public class StandardOcrSettings
     {
@@ -14,6 +16,12 @@
 
     public class AzureOcrSettings
     {
+        public AzureOcrSettings()
+        {
+            SubscriptionKey = ConfigurationManager.AppSettings["azureSubscriptionKey"];
+            Endpoint = ConfigurationManager.AppSettings["azureEndpoint"];
+        }
+
         public AzureOcrSettings(string subscriptionKey, string endpoint)
         {
             SubscriptionKey = subscriptionKey;
@@ -40,6 +48,11 @@
 
     public class GoogleOcrSettings
     {
+        public GoogleOcrSettings()
+        {
+            ApiToken = ConfigurationManager.AppSettings["googleApiToken"];
+        }
+
         public GoogleOcrSettings(string apiToken)
         {
             ApiToken = apiToken;
