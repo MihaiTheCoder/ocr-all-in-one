@@ -15,8 +15,8 @@ jobs:
       #   with:
       #     dotnet-version: 3.1.200
       - name: Generate nuget package
-      run: dotnet pack Ocr.Wrapper/Ocr.Wrapper.csproj --configuration Release -o nupkg
-      # working-directory: ./src
+        run: dotnet pack Ocr.Wrapper/Ocr.Wrapper.csproj --configuration Release -o nupkg
+        # working-directory: ./src
 
       # Publish
       - name: publish on version change
