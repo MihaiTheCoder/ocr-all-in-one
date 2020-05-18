@@ -22,7 +22,7 @@ namespace Ocr.Wrapper.Tests
             var endpoint = ConfigurationManager.AppSettings["azureEndpoint"];
 
 
-            AzureOcrExecutor azureOcrExecutor = new AzureOcrExecutor(subscriptionKey, endpoint);
+            AzureOcrService azureOcrExecutor = new AzureOcrService(subscriptionKey, endpoint);
             var result = await azureOcrExecutor.GetOcrResultAsync(@"data/abc.JPG");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -32,7 +32,7 @@ namespace Ocr.Wrapper.Tests
         [TestMethod()]
         public async Task WindowsOcr()
         {
-            WindowsOcrExecutor windowsOcrExecutor = new WindowsOcrExecutor();
+            WindowsOcrService windowsOcrExecutor = new WindowsOcrService();
             var result = await windowsOcrExecutor.GetOcrResultAsync(@"data/abc.JPG", "en");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -42,7 +42,7 @@ namespace Ocr.Wrapper.Tests
         [TestMethod]
         public async Task Tesseract5()
         {
-            TesseractService tesseractService = new TesseractService();
+            TesseractOcrService tesseractService = new TesseractOcrService();
             var result = await tesseractService.GetOcrResultAsync(@"data/abc.JPG", "eng");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();

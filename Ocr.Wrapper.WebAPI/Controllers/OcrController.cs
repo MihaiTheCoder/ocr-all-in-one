@@ -14,9 +14,9 @@ namespace OcrFromConsole
     [Route("[controller]")]
     public class OcrController : ControllerBase
     {
-        private readonly WindowsOcrExecutor windowsOcrExecutor;
+        private readonly WindowsOcrService windowsOcrExecutor;
 
-        public OcrController(WindowsOcrExecutor windowsOcrExecutor)
+        public OcrController(WindowsOcrService windowsOcrExecutor)
         {
             this.windowsOcrExecutor = windowsOcrExecutor;
         }

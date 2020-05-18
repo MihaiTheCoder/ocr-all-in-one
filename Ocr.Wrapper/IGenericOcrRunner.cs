@@ -9,11 +9,11 @@ namespace Ocr.Wrapper
     public interface IGenericOcrRunner<T>: IGenericOcrRunner
         where T: IMappableToGenericResponse
     {
-        Task<T> GetOcrResultAsync(string inputImage, string inputLanguage = null);
+        Task<T> GetOcrResultAsync(string inputImage, string inputLanguage = null, bool runAnywayWithBadLanguage = true);
     }
     public interface IGenericOcrRunner
     {
-        Task<GenericOcrResponse> GetGenericOcrResultAsync(string inputImage, string inputLanguage=null);
+        Task<GenericOcrResponse> GetGenericOcrResultAsync(string inputImage, string inputLanguage=null, bool runAnywayWithBadLanguage = true);
 
         string Name { get; }
     }
