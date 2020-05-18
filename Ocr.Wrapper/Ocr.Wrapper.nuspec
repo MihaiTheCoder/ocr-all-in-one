@@ -8,7 +8,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/MihaiTheCoder/ocr-all-in-one</projectUrl>
-    <iconUrl></iconUrl>
     <description>A package that helps to use all common OCRs (Windows, Tesseract, Azure, AWS, Google)</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2020</copyright>

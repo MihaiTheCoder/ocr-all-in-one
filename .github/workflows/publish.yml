@@ -10,13 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # - name: Setup dotnet
-      #   uses: actions/setup-dotnet@v1
-      #   with:
-      #     dotnet-version: 3.1.200
       - name: Generate nuget package
-        run: dotnet pack Ocr.Wrapper/Ocr.Wrapper.csproj --configuration Release -o nupkg
-        # working-directory: ./src
+        run: nuget pack Ocr.Wrapper
 
       # Publish
       - name: publish on version change
