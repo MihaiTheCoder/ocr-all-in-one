@@ -22,7 +22,7 @@ namespace Ocr.Wrapper.Tests
             var endpoint = ConfigurationManager.AppSettings["azureEndpoint"];
 
 
-            AzureOcrExecutor azureOcrExecutor = new AzureOcrExecutor(subscriptionKey, endpoint);
+            AzureOcrService azureOcrExecutor = new AzureOcrService(subscriptionKey, endpoint);
             var result = await azureOcrExecutor.GetOcrResultAsync(@"data/abc.JPG");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -32,7 +32,7 @@ namespace Ocr.Wrapper.Tests
         [TestMethod()]
         public async Task WindowsOcr()
         {
-            WindowsOcrExecutor windowsOcrExecutor = new WindowsOcrExecutor();
+            WindowsOcrService windowsOcrExecutor = new WindowsOcrService();
             var result = await windowsOcrExecutor.GetOcrResultAsync(@"data/abc.JPG", "en");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -42,7 +42,7 @@ namespace Ocr.Wrapper.Tests
         [TestMethod]
         public async Task Tesseract5()
         {
-            TesseractService tesseractService = new TesseractService();
+            TesseractOcrService tesseractService = new TesseractOcrService();
             var result = await tesseractService.GetOcrResultAsync(@"data/abc.JPG", "eng");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -79,7 +79,7 @@ namespace Ocr.Wrapper.Tests
         {
             StandardOcrSettings standardOcrSettings = GetStandardOcrSettings();
 
-            MultiOcrRunner genericOcrRunner = new StandardMultiOcrRunnerFactory(standardOcrSettings)
+            MultiOcrRunner genericOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings)
                 .GetMultiOcrRunner();
             var results = await genericOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
             Assert.IsNotNull(results);
@@ -91,7 +91,7 @@ namespace Ocr.Wrapper.Tests
             StandardOcrSettings standardOcrSettings = GetStandardOcrSettings();
 
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
-            MultiOcrRunner multiOcrRunner = new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath)
+            MultiOcrRunner multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath)
                 .GetMultiOcrRunner();
             var results = await multiOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
             Assert.IsNotNull(results);
@@ -104,7 +104,7 @@ namespace Ocr.Wrapper.Tests
             var googleApiToken = ConfigurationManager.AppSettings["googleApiToken"];
             var awsAcessKey = ConfigurationManager.AppSettings["awsAccessKey"];
             var awsSecretKey = ConfigurationManager.AppSettings["awsSecretKey"];
-            StandardOcrSettings standardOcrSettings = new StandardOcrSettings
+            StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {
                 AwsOcrSettings = new AwsOcrSettings(awsAcessKey, awsSecretKey),
                 AzureOcrSettings = new AzureOcrSettings(azureSubscriptionKey, azureEndpoint),

@@ -8,32 +8,19 @@ using System.Threading.Tasks;
 
 namespace Ocr.Wrapper.TesseractOcr
 {
-    // <summary>
-    /// Service to read texts from images through OCR Tesseract engine.
-    /// http://diegogiacomelli.com.br/using-tesseract4-with-csharp/
-    /// </summary>
-    public class TesseractService : GenericOcrRunner<TesseractResponse>
+    public class TesseractLowLevelOcrService: ILowLevelOcrService<TesseractResponse>
     {
         private readonly string _tesseractExePath;
 
-        public override string Name => nameof(TesseractService);
+        public string Name => nameof(TesseractLowLevelOcrService);
+
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TesseractService"/> class.
         /// </summary>
-        /// <param name="tesseractDir">The path for the Tesseract4 installation folder (C:\Program Files\Tesseract-OCR).</param>        
+        /// <param name="tesseractDir">The path for the Tesseract4 installation folder using our own installer, or using the standard installer (C:\Program Files\Tesseract-OCR).</param>        
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
-        public TesseractService(string tesseractDir = @"C:\Program Files\Tesseract-OCR", string dataDir = null): this(new NoOpOcrCache(), tesseractDir, dataDir)
-        {
-
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TesseractService"/> class.
-        /// </summary>
-        /// <param name="tesseractDir">The path for the Tesseract4 installation folder (C:\Program Files\Tesseract-OCR).</param>        
-        /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
-        public TesseractService(IOcrCache ocrCache, string tesseractDir= @"C:\Program Files\Tesseract-OCR", string dataDir = null): base(ocrCache)
+        public TesseractLowLevelOcrService(string tesseractDir = TesseractInstaller.DefaultInstallDir, string dataDir = null)
         {
             if(!Directory.Exists(tesseractDir))
                 tesseractDir = @"C:\Program Files (x86)\Tesseract-OCR";
@@ -41,7 +28,7 @@ namespace Ocr.Wrapper.TesseractOcr
                 throw new DirectoryNotFoundException("Could not find tesseract dir " + tesseractDir);
             
             // Tesseract configs.
-            _tesseractExePath = Path.Combine(tesseractDir, "tesseract.exe");            
+            _tesseractExePath = Path.Combine(tesseractDir, "tesseract.exe");
 
             if (String.IsNullOrEmpty(dataDir))
                 dataDir = Path.Combine(tesseractDir, "tessdata");
@@ -49,7 +36,7 @@ namespace Ocr.Wrapper.TesseractOcr
             Environment.SetEnvironmentVariable("TESSDATA_PREFIX", dataDir);
         }
 
-        public override async Task<TesseractResponse> GetOcrResultWithoutCacheAsync(string inputFilePath, string language)
+        public async Task<TesseractResponse> GetOcrResultWithoutCacheAsync(string inputFilePath, string language, bool runAnywayWithBadLanguage = true)
         {
             if (language == null)
                 language = "eng";
@@ -69,7 +56,7 @@ namespace Ocr.Wrapper.TesseractOcr
         private async Task<TesseractResponse> RunTesseract(string tempPath, string inputFile, string language)
         {
             var tempOutputFile = NewTempFileName(tempPath);
-            
+
             var info = new ProcessStartInfo
             {
                 FileName = _tesseractExePath,
@@ -103,7 +90,7 @@ namespace Ocr.Wrapper.TesseractOcr
                 else
                 {
                     var stderr = process.StandardError.ReadToEnd();
-                    tcs.SetException(new InvalidOperationException(stderr));                    
+                    tcs.SetException(new InvalidOperationException(stderr));
                 }
                 process.Dispose();
             };

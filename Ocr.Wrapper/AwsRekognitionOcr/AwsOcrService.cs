@@ -2,6 +2,7 @@
 using Amazon.Rekognition.Model;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using Ocr.Wrapper.ImageManipulation;
 using System;
 using System.Collections.Generic;
 using System.Dynamic;
@@ -13,33 +14,11 @@ using System.Threading.Tasks;
 
 namespace Ocr.Wrapper.AwsRekognitionOcr
 {
-    public class AwsOcrService: GenericOcrRunner<AwsOcrResponse>
+    public class AwsOcrService: HighLevelOcrService<AwsOcrResponse, AwsLowLevelOcrService>
     {
-        AmazonRekognitionClient rekognitionClient;
-
-        public AwsOcrService(string accessKey, string secretKey): this(new NoOpOcrCache(), accessKey, secretKey)
+        public AwsOcrService(string accessKey, string secretKey, HighLevelOcrServiceParams ocrParams=null): base(new AwsLowLevelOcrService(accessKey, secretKey), ocrParams)
         {
-
-        }
-        
-        public AwsOcrService(IOcrCache ocrCache, string accessKey, string secretKey): base(ocrCache)
-        {
-            rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey);
-        }
-
-        public override string Name => nameof(AwsOcrService);
-
-        public override async Task<AwsOcrResponse> GetOcrResultWithoutCacheAsync(string filePath, string language=null)
-        {
-            MemoryStream ms = new MemoryStream();
-
-            using (FileStream fileStream = new FileStream(filePath, FileMode.Open))
-            {
-                fileStream.CopyTo(ms);                
-            }
-            var request = new DetectTextRequest { Image = new Image() { Bytes = ms }};
-            DetectTextResponse result = await rekognitionClient.DetectTextAsync(request);
-            return AwsResponseMapper.Get(result);
+            
         }
     }
 }

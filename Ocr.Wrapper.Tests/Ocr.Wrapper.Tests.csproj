@@ -61,6 +61,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ImageMagickCompressorTests.cs" />
     <Compile Include="MultiOcrRunner.cs" />
     <Compile Include="OcrTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +70,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TesseractInstallerTests.cs" />
     <Compile Include="WindowsOcrExecutorTests.cs" />
   </ItemGroup>
   <ItemGroup>

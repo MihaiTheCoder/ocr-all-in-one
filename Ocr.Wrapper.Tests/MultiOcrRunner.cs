@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.IO;
 using System.Threading.Tasks;
+using Ocr.Wrapper.TesseractOcr;
 
 namespace Ocr.Wrapper.Tests
 {
@@ -19,9 +20,9 @@ namespace Ocr.Wrapper.Tests
         #region Additional test attributes
 
         [TestInitialize()]
-        public void MultiOcrRunnerTestInitialize() 
+        public async Task MultiOcrRunnerTestInitialize() 
         {
-            StandardOcrSettings standardOcrSettings = new StandardOcrSettings
+            StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {                
                 WindowsOcrSettings = new WindowsOcrSettings(),
                 AzureOcrSettings = new AzureOcrSettings(),
@@ -29,7 +30,7 @@ namespace Ocr.Wrapper.Tests
                 TesseractOcrSettings = new TesseractOcrSettings(),
             };
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
-            multiOcrRunner = new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath).GetMultiOcrRunner();
+            multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath).GetMultiOcrRunner();
         }
         
         #endregion
@@ -42,6 +43,6 @@ namespace Ocr.Wrapper.Tests
             var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath, "ron");
 
             Assert.IsNotNull(result);
-        }
+        }        
     }
 }

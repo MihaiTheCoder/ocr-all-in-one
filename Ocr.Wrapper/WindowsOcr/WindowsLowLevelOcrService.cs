@@ -1,39 +1,26 @@
-﻿using System;
-using System.IO;
-using System.Linq;
+﻿using System.IO;
 using System.Management.Automation;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Schedulers;
+using System.Linq;
 
 namespace Ocr.Wrapper.WindowsOcr
 {
-    /// <summary>
-    /// Needs to be singleton, as it's the class that makes sure that Ocr is not invoked in parallel.
-    /// A powershell instance is started in background, powershell session that is closed when the object is disposed.
-    /// If you have multiple instances of OcrExecutor that run in parallel, the windows OCR dll will complain
-    /// If you execute the sync method from multiple threads in parallel the powershell will complain because it was not developed to work in a multi threaded fashion.
-    /// The Async API can be used from multiple threads, and it works fine as long as you have a single instance of OcrExecutor
-    /// </summary>
-    public class WindowsOcrExecutor : GenericOcrRunner<WindowsOcrResult>, IDisposable
+    public class WindowsLowLevelOcrService: ILowLevelOcrService<WindowsOcrResult>
     {
         public static object lockObj = new object();
         PowerShell powershell;
         internal bool isOcrRunning = false;
         TaskFactory factory;
         private readonly IOcrCache ocrCache;
-        internal StringBuilder debugPsOutput = new StringBuilder();
+        protected internal StringBuilder debugPsOutput = new StringBuilder();
 
 
-        public override string Name => nameof(WindowsOcrExecutor);
+        public string Name => nameof(WindowsLowLevelOcrService);
 
-        public WindowsOcrExecutor(): this(new NoOpOcrCache())
-        {
-
-        }
-
-        public WindowsOcrExecutor(IOcrCache ocrCache): base(ocrCache)
+        public WindowsLowLevelOcrService()
         {
             var taskScheduler = new LimitedConcurrencyLevelTaskScheduler(1);
             factory = new TaskFactory(taskScheduler);
@@ -41,7 +28,6 @@ namespace Ocr.Wrapper.WindowsOcr
             string psScript = GetResourceText("Get-Text-Win-OCR.ps1");
             powershell.AddScript(psScript, false);
             powershell.Invoke();
-            this.ocrCache = ocrCache;
         }
 
         /// <summary>
@@ -65,9 +51,9 @@ namespace Ocr.Wrapper.WindowsOcr
         /// </summary>
         /// <param name="imagePath"></param>
         /// <returns></returns>
-        public override Task<WindowsOcrResult> GetOcrResultWithoutCacheAsync(string imagePath, string language=null)
+        public Task<WindowsOcrResult> GetOcrResultWithoutCacheAsync(string imagePath, string language = null, bool runAnywayWithBadLanguage = true)
         {
-            return factory.StartNew(() => { return GetOcrResult(imagePath, language); });
+            return factory.StartNew(() => { return GetOcrResult(imagePath, language, runAnywayWithBadLanguage); });
         }
 
         /// <summary>
@@ -78,9 +64,9 @@ namespace Ocr.Wrapper.WindowsOcr
         /// <thre
         /// <returns></returns>
         public WindowsOcrResult GetOcrResult(
-            string imagePath, 
-            string language, 
-            bool runAnywayWithBadLanguage=true)
+            string imagePath,
+            string language,
+            bool runAnywayWithBadLanguage = true)
         {
 
             powershell.Commands.Clear();

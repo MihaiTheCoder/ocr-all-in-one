@@ -42,6 +42,9 @@
     <Reference Include="Foundatio, Version=9.0.0.0, Culture=neutral, PublicKeyToken=fc181f0a46f65747, processorArchitecture=MSIL">
       <HintPath>..\packages\Foundatio.9.1.1\lib\netstandard2.0\Foundatio.dll</HintPath>
     </Reference>
+    <Reference Include="Magick.NET-Q16-AnyCPU, Version=7.17.0.0, Culture=neutral, PublicKeyToken=2004825badfa91ec, processorArchitecture=MSIL">
+      <HintPath>..\packages\Magick.NET-Q16-AnyCPU.7.17.0\lib\net40\Magick.NET-Q16-AnyCPU.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -63,8 +66,15 @@
     </Reference>
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Management.Automation.dll.10.0.10586.0\lib\net40\System.Management.Automation.dll</HintPath>
+      <HintPath>..\packages\Microsoft.PowerShell.5.ReferenceAssemblies.1.1.0\lib\net4\System.Management.Automation.dll</HintPath>
     </Reference>
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
@@ -98,18 +108,25 @@
   <ItemGroup>
     <Compile Include="AwsRekognitionOcr\AwsBoundingBox.cs" />
     <Compile Include="AwsRekognitionOcr\AwsGeometry.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsLowLevelService.cs" />
     <Compile Include="AwsRekognitionOcr\AWsOcrResponse.cs" />
     <Compile Include="AwsRekognitionOcr\AwsOcrService.cs" />
     <Compile Include="AwsRekognitionOcr\AwsPoint.cs" />
     <Compile Include="AwsRekognitionOcr\AwsResponseMapper.cs" />
     <Compile Include="AwsRekognitionOcr\AwsTextDetection.cs" />
     <Compile Include="AwsRekognitionOcr\AwsTextTypes.cs" />
-    <Compile Include="AzureOcr\AzureOcrExecutor.cs" />
+    <Compile Include="AzureOcr\AzureLowLevelOcrService.cs" />
+    <Compile Include="AzureOcr\AzureOcrService.cs" />
+    <Compile Include="GoogleOcr\GoogleLowLevelOcrService.cs" />
+    <Compile Include="HighLevelOcrService.cs" />
+    <Compile Include="ILowLevelOcrService.cs" />
     <Compile Include="AzureOcr\AzureOcrLine.cs" />
     <Compile Include="AzureOcr\AzureOcrRegion.cs" />
     <Compile Include="AzureOcr\AzureOcrResults.cs" />
     <Compile Include="AzureOcr\AzureOcrWord.cs" />
     <Compile Include="GenericOcrRunner.cs" />
+    <Compile Include="ImageManipulation\IImageCompressor.cs" />
+    <Compile Include="ImageManipulation\ImageMagickCompressor.cs" />
     <Compile Include="IMappableToGenericResponse.cs" />
     <Compile Include="MultiOcrRunner.cs" />
     <Compile Include="GenericOcrResponse.cs" />
@@ -133,14 +150,18 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <Compile Include="StandardOcrSettings.cs" />
+    <Compile Include="TesseractOcr\ITesseractInstaller.cs" />
     <Compile Include="TesseractOcr\TesseractDetectionLine.cs" />
+    <Compile Include="TesseractOcr\TesseractInstaller.cs" />
+    <Compile Include="TesseractOcr\TesseractLowLevelOcrService.cs" />
     <Compile Include="TesseractOcr\TesseractMapper.cs" />
+    <Compile Include="TesseractOcr\TesseractOcrService.cs" />
     <Compile Include="TesseractOcr\TesseractResponse.cs" />
-    <Compile Include="TesseractOcr\TesseractService.cs" />
     <Compile Include="WindowsOcr\BoundingRect.cs" />
-    <Compile Include="WindowsOcr\WindowsOcrExecutor.cs" />
+    <Compile Include="WindowsOcr\WindowsLowLevelOcrService.cs" />
     <Compile Include="WindowsOcr\OcrLine.cs" />
     <Compile Include="WindowsOcr\WindowsOcrResult.cs" />
+    <Compile Include="WindowsOcr\WindowsOcrService.cs" />
     <Compile Include="WindowsOcr\Word.cs" />
   </ItemGroup>
   <ItemGroup>
