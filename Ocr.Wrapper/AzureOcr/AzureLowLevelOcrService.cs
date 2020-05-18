@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json.Linq;
-using Ocr.Wrapper.ImageManipulation;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,32 +10,27 @@ using System.Threading.Tasks;
 
 namespace Ocr.Wrapper.AzureOcr
 {
-    public class AzureOcrExecutor: GenericOcrRunner<AzureOcrResults>
+    public class AzureLowLevelOcrService: ILowLevelOcrService<AzureOcrResults>
     {
-        public AzureOcrExecutor(string subscriptionKey, string endpoint): this(new NoOpOcrCache(), subscriptionKey, endpoint)
-        {
+        private readonly string subscriptionKey;
+        private readonly string endpoint;
+        private readonly string uriBase;
 
-        }
-        public AzureOcrExecutor(IOcrCache ocrCache, string subscriptionKey, string endpoint, IImageCompressor imageCompressor=null): base(ocrCache, imageCompressor)
+        public AzureLowLevelOcrService(string subscriptionKey, string endpoint)
         {
             this.subscriptionKey = subscriptionKey;
             this.endpoint = endpoint;
             uriBase = endpoint + "vision/v2.1/ocr";
         }
 
-        // the OCR method endpoint
-        string uriBase;
-        private readonly string subscriptionKey;
-        private readonly string endpoint;
-
-        public override string Name => nameof(AzureOcrExecutor);
+        public string Name => nameof(AzureLowLevelOcrService);
 
         /// <summary>
         /// Gets the text visible in the specified image file by using
         /// the Computer Vision REST API.
         /// </summary>
         /// <param name="imageFilePath">The image file with printed text.</param>
-        public override async Task<AzureOcrResults> GetOcrResultWithoutCacheAsync(string imageFilePath, string language="unk")
+        public async Task<AzureOcrResults> GetOcrResultWithoutCacheAsync(string imageFilePath, string language = "unk", bool runAnywayWithBadLanguage = true)
         {
             if (language == null)
                 language = "unk";
@@ -78,7 +72,7 @@ namespace Ocr.Wrapper.AzureOcr
 
                 // Asynchronously get the JSON response.
                 string contentString = await response.Content.ReadAsStringAsync();
-                return AzureOcrResults.FromDynamic(JToken.Parse(contentString) as dynamic);                
+                return AzureOcrResults.FromDynamic(JToken.Parse(contentString) as dynamic);
             }
             catch (Exception e)
             {

@@ -107,13 +107,18 @@
   <ItemGroup>
     <Compile Include="AwsRekognitionOcr\AwsBoundingBox.cs" />
     <Compile Include="AwsRekognitionOcr\AwsGeometry.cs" />
+    <Compile Include="AwsRekognitionOcr\AwsLowLevelService.cs" />
     <Compile Include="AwsRekognitionOcr\AWsOcrResponse.cs" />
     <Compile Include="AwsRekognitionOcr\AwsOcrService.cs" />
     <Compile Include="AwsRekognitionOcr\AwsPoint.cs" />
     <Compile Include="AwsRekognitionOcr\AwsResponseMapper.cs" />
     <Compile Include="AwsRekognitionOcr\AwsTextDetection.cs" />
     <Compile Include="AwsRekognitionOcr\AwsTextTypes.cs" />
-    <Compile Include="AzureOcr\AzureOcrExecutor.cs" />
+    <Compile Include="AzureOcr\AzureLowLevelOcrService.cs" />
+    <Compile Include="AzureOcr\AzureOcrService.cs" />
+    <Compile Include="GoogleOcr\GoogleLowLevelOcrService.cs" />
+    <Compile Include="HighLevelOcrService.cs" />
+    <Compile Include="ILowLevelOcrService.cs" />
     <Compile Include="AzureOcr\AzureOcrLine.cs" />
     <Compile Include="AzureOcr\AzureOcrRegion.cs" />
     <Compile Include="AzureOcr\AzureOcrResults.cs" />
@@ -147,13 +152,15 @@
     <Compile Include="TesseractOcr\ITesseractInstaller.cs" />
     <Compile Include="TesseractOcr\TesseractDetectionLine.cs" />
     <Compile Include="TesseractOcr\TesseractInstaller.cs" />
+    <Compile Include="TesseractOcr\TesseractLowLevelOcrService.cs" />
     <Compile Include="TesseractOcr\TesseractMapper.cs" />
+    <Compile Include="TesseractOcr\TesseractOcrService.cs" />
     <Compile Include="TesseractOcr\TesseractResponse.cs" />
-    <Compile Include="TesseractOcr\TesseractService.cs" />
     <Compile Include="WindowsOcr\BoundingRect.cs" />
-    <Compile Include="WindowsOcr\WindowsOcrExecutor.cs" />
+    <Compile Include="WindowsOcr\WindowsLowLevelOcrService.cs" />
     <Compile Include="WindowsOcr\OcrLine.cs" />
     <Compile Include="WindowsOcr\WindowsOcrResult.cs" />
+    <Compile Include="WindowsOcr\WindowsOcrService.cs" />
     <Compile Include="WindowsOcr\Word.cs" />
   </ItemGroup>
   <ItemGroup>

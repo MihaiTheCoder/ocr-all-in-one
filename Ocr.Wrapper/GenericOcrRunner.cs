@@ -19,9 +19,9 @@ namespace Ocr.Wrapper
         }
         public abstract string Name { get; }
 
-        public abstract Task<T> GetOcrResultWithoutCacheAsync(string inputImage, string inputLanguage = null);
+        public abstract Task<T> GetOcrResultWithoutCacheAsync(string inputImage, string inputLanguage = null, bool runAnywayWithBadLanguage = true);
        
-        public async Task<T> GetOcrResultAsync(string inputImage, string inputLanguage = null)
+        public async Task<T> GetOcrResultAsync(string inputImage, string inputLanguage = null, bool runAnywayWithBadLanguage = true)
         {
             if (imageCompressor != null)
                 inputImage = imageCompressor.CompressInPlace(inputImage);
@@ -38,7 +38,7 @@ namespace Ocr.Wrapper
             return result;
         }
 
-        public async Task<GenericOcrResponse> GetGenericOcrResultAsync(string inputImage, string inputLanguage = null)
+        public async Task<GenericOcrResponse> GetGenericOcrResultAsync(string inputImage, string inputLanguage = null, bool runAnywayWithBadLanguage = true)
         {
             var result = await GetOcrResultAsync(inputImage, inputLanguage);
             return result.Map();
