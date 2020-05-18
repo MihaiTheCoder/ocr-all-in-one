@@ -2,6 +2,21 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+	<id>Ocr.Wrapper</id>
+    <Copyright />
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>1.0.0-alpha</Version>
+    <PackageLicenseUrl></PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/MihaiTheCoder/ocr-all-in-one</RepositoryUrl>
+    <Authors>Petrutiu brothers</Authors>
+    <Company />
+    <PackageProjectUrl>https://github.com/MihaiTheCoder/ocr-all-in-one</PackageProjectUrl>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <PackageTags>OCR AWS Google Tesseract Windows Azure</PackageTags>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+  </PropertyGroup>
+  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C673FC3C-14E5-4E6A-B4F2-320E67EE76B2}</ProjectGuid>
