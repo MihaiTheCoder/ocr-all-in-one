@@ -38,9 +38,8 @@ namespace Ocr.Wrapper.Tests
         [TestMethod]
         public async Task RunAll()
         {
-            //var filePath = "data/TLCShot.png";
-            var filePath = @"C:\Ioana\Facturi\IMG_20200113_215442.jpg";
-            var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath, "ron");
+            var filePath = "data/TLCShot.png";
+            var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath);
 
             Assert.IsNotNull(result);
         }        

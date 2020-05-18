@@ -44,7 +44,7 @@ Function Get-Text-OCR {
     [CmdletBinding()]
 	param($Path, [string]$language, [bool]$runAnywayWithBadLanguage=$false)
 
-    $lng = [Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages | ? {($_.LanguageTag -ieq $language) -or ($_.LanguageTag.Split("-")[0] -ieq $language) }
+    $lng = @([Windows.Media.Ocr.OcrEngine]::AvailableRecognizerLanguages | ? {($_.LanguageTag -ieq $language) -or ($_.LanguageTag.Split("-")[0] -ieq $language) })[0]
     
     if ($lng -eq $null)
     {
