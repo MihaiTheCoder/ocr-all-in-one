@@ -35,7 +35,7 @@ jobs:
         PROJECT_FILE_PATH: Ocr.Wrapper/Ocr.Wrapper.csproj
 
         # NuGet package id, used for version detection & defaults to project name
-        PACKAGE_NAME: Ocr.Wrapper
+        PACKAGE_NAME: Ocr.Wrapper -Properties Configuration=Release
 
         # Filepath with version info, relative to root of repository & defaults to PROJECT_FILE_PATH
         # VERSION_FILE_PATH: Directory.Build.props
