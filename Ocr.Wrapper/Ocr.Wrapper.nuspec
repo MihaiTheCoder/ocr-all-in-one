@@ -12,11 +12,6 @@
     <description>A package that helps to use all common OCRs (Windows, Tesseract, Azure, AWS, Google)</description>
     <releaseNotes>Initial release</releaseNotes>
     <copyright>Copyright 2020</copyright>
-    <tags>OCR AWS Google Tesseract Windows Azure</tags>
-    <dependencies>
-      <group targetFramework=".NETStandard2.1">
-        <dependency id="SampleDependency" version="1.0.0" />
-      </group>
-    </dependencies>
+    <tags>OCR AWS Google Tesseract Windows Azure</tags>    
   </metadata>
 </package>
