@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Ocr.Wrapper
 {
-    public class HighLevelOcrService<TResponse, TLowLevelService> : IGenericOcrRunner<TResponse>
+    public class HighLevelOcrService<TResponse, TLowLevelService> : IHighLevelOcrService<TResponse>
         where TResponse : IMappableToGenericResponse
         where TLowLevelService: ILowLevelOcrService<TResponse>
     {

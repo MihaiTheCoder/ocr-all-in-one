@@ -29,6 +29,11 @@ namespace Ocr.Wrapper.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<WindowsOcrService>();
+            StandardMultiOcrRunnerFactory factory = new StandardMultiOcrRunnerFactory(new StandardOcrSettings {
+                WindowsOcrSettings = new WindowsOcrSettings(),
+                TesseractOcrSettings = new TesseractOcrSettings()
+            });
+            services.AddSingleton(factory.GetMultiOcrRunner().Result);
             services.AddControllers();
             AddSwaggerGen(services);
         }

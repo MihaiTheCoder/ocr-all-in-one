@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Ocr.Wrapper
 {
-    public interface IGenericOcrRunner<T>: IGenericOcrRunner
+    public interface IHighLevelOcrService<T>: IGenericOcrRunner
         where T: IMappableToGenericResponse
     {
         Task<T> GetOcrResultAsync(string inputImage, string inputLanguage = null, bool runAnywayWithBadLanguage = true);
