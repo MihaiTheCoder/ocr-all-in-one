@@ -35,7 +35,7 @@ namespace Ocr.Wrapper
             return OcrRunners.FirstOrDefault(o => o.Name == ocrName);
         }
 
-        public T GetOcrByType<T>() where T: class
+        public T GetOcrByType<T>() where T: class, IGenericOcrRunner
         {
             return OcrRunners.FirstOrDefault(ocr => ocr is T) as T;
         }

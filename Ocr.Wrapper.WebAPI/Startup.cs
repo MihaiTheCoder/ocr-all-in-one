@@ -33,9 +33,29 @@ namespace Ocr.Wrapper.WebAPI
                 WindowsOcrSettings = new WindowsOcrSettings(),
                 TesseractOcrSettings = new TesseractOcrSettings()
             });
+
+            //From User Secrets, do not enter them in appSettings.json -> Right Click Ocr.Wrapper.WebAPI -> Manage User Secrets
+            if (ConfigHasAllKeys("azure:SubscriptionKey", "azure:Endpoint"))
+                factory.Settings.AzureOcrSettings = new AzureOcrSettings(Configuration["azure:SubscriptionKey"], Configuration["azure:Endpoint"]);
+            if (ConfigHasAllKeys("google:ApiToken"))
+                factory.Settings.GoogleOcrSettings = new GoogleOcrSettings(Configuration["google:ApiToken"]);
+            if (ConfigHasAllKeys("aws:AccessKey", "aws:SecretKey"))
+                factory.Settings.AwsOcrSettings = new AwsOcrSettings(Configuration["aws:AccessKey"], Configuration["aws:SecretKey"]);
+
             services.AddSingleton(factory.GetMultiOcrRunner().Result);
             services.AddControllers();
             AddSwaggerGen(services);
+        }
+
+        private bool ConfigHasAllKeys(params string[] configKeys)
+        {
+            foreach (var configKey in configKeys)
+            {
+                if (string.IsNullOrEmpty(Configuration.GetValue<string>(configKey, null)))
+                    return false;
+            }
+
+            return true;
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
