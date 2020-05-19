@@ -1,0 +1,438 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsBoundingBox" Collapsed="true">
+    <Position X="12.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAIAAAACAAAAAAAAAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsBoundingBox.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsGeometry" Collapsed="true">
+    <Position X="14" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsGeometry.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsLowLevelOcrService" BaseTypeListCollapsed="true">
+    <Position X="10.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABQAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsLowLevelService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsOcrResponse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAABAAAABAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AWsOcrResponse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsOcrService">
+    <Position X="3.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsPoint" Collapsed="true">
+    <Position X="19.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsPoint.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsResponseMapper" Collapsed="true">
+    <Position X="21" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAgAAAAABAAAAAAAAgAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsResponseMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsTextDetection" Collapsed="true">
+    <Position X="22.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAQAAAAAAgAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsTextDetection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsRekognitionOcr.AwsTextTypes" Collapsed="true">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AwsRekognitionOcr\AwsTextTypes.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcr.AzureLowLevelOcrService" BaseTypeListCollapsed="true">
+    <Position X="8.5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAgwAAAAAAAAAQAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AzureOcr\AzureLowLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcr.AzureOcrLine" Collapsed="true">
+    <Position X="12.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAACAAABAAAAAAAAAgAAA=</HashCode>
+      <FileName>AzureOcr\AzureOcrLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcr.AzureOcrRegion" Collapsed="true">
+    <Position X="14" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAACAAABACAAAAAAAAAAA=</HashCode>
+      <FileName>AzureOcr\AzureOcrRegion.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcr.AzureOcrResults" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="15.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQAACRAAAABIBAAAAAAAAAAAAAAgAAAAAAAAAAA=</HashCode>
+      <FileName>AzureOcr\AzureOcrResults.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcr.AzureOcrService">
+    <Position X="7.5" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AzureOcr\AzureOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcr.AzureOcrWord" Collapsed="true">
+    <Position X="19.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAACAAABAAAAAACAAAAAA=</HashCode>
+      <FileName>AzureOcr\AzureOcrWord.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.FileStorageOcrCache" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAQIAABAAQAAAAAAABCAAABAAAgAAAAAAAAAA=</HashCode>
+      <FileName>FileStorageOcrCache.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.GenericOcrResponse" Collapsed="true">
+    <Position X="18" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQ=</HashCode>
+      <FileName>GenericOcrResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GenericBoxDetection" Collapsed="true">
+    <Position X="16" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAKAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GenericOcrResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GenericBoundingBox" Collapsed="true">
+    <Position X="14" Y="2.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAAAAAAAAAAEAAAAAIAAAACAAAAAAAAAA=</HashCode>
+      <FileName>GenericOcrResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.HighLevelOcrService&lt;TResponse, TLowLevelService&gt;" Collapsed="true">
+    <Position X="4" Y="0.5" Width="4.75" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAEAQAAAIBAAAAAAAAAAAACgA=</HashCode>
+      <FileName>HighLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="Ocr.Wrapper.HighLevelOcrServiceParams" Collapsed="true">
+    <Position X="12.25" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAA=</HashCode>
+      <FileName>HighLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.MultiOcrRunner">
+    <Position X="10.25" Y="8.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>MultiOcrRunner.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.StandardMultiOcrRunnerFactory">
+    <Position X="6.5" Y="8.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAAEAAAAAAAAAAAAAAAAAAAgAAAAAQCAAA=</HashCode>
+      <FileName>MultiOcrRunnerFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.NoOpOcrCache" BaseTypeListCollapsed="true">
+    <Position X="3.5" Y="8.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>NoOpOcrCache.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.StandardOcrSettings" Collapsed="true">
+    <Position X="15" Y="5.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAAAAEAAAAgAAAAAAAAKAAAAABAA=</HashCode>
+      <FileName>StandardOcrSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AzureOcrSettings" Collapsed="true">
+    <Position X="17.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandardOcrSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.AwsOcrSettings" Collapsed="true">
+    <Position X="17.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAgAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandardOcrSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcrSettings" Collapsed="true">
+    <Position X="17.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandardOcrSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcrSettings" Collapsed="true">
+    <Position X="16.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAAAAAACAAAAEAABAAAA=</HashCode>
+      <FileName>StandardOcrSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcrSettings" Collapsed="true">
+    <Position X="14" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>StandardOcrSettings.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleBoundingPoly" Collapsed="true">
+    <Position X="12.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleBoundingPoly.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleLowLevelOcrService" BaseTypeListCollapsed="true">
+    <Position X="6.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gEAAABAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleLowLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleOcrResponse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="14" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABBAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleOcrResponse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleOcrResponseMapper" Collapsed="true">
+    <Position X="15.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleOcrResponseMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleOcrService">
+    <Position X="9.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleOcrSingleResponse" Collapsed="true">
+    <Position X="19.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleOcrSingleResponse.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleTextAnnotation" Collapsed="true">
+    <Position X="21" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAgAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GoogleOcr\GoogleTextAnnotation.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.GoogleOcr.GoogleVertice" Collapsed="true">
+    <Position X="22.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAYAA=</HashCode>
+      <FileName>GoogleOcr\GoogleVertice.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.ImageManipulation.ImageMagickCompressor" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAACAAAgAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>ImageManipulation\ImageMagickCompressor.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="System.Threading.Tasks.Schedulers.LimitedConcurrencyLevelTaskScheduler" Collapsed="true">
+    <Position X="15.75" Y="6.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAABEEAAAAAAAACAgAAAACAAAAAAACAAAAAAgAA=</HashCode>
+      <FileName>LimitedConcurrencyLevelTaskScheduler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.Properties.Resources" Collapsed="true">
+    <Position X="19.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABMAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcr.TesseractDetectionLine" Collapsed="true">
+    <Position X="12.25" Y="4.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAABAAAAAAAQAAIAEAAAIAIAAABCAAACiAAAAA=</HashCode>
+      <FileName>TesseractOcr\TesseractDetectionLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcr.TesseractInstaller" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAABAEAAAAAAAAAAACAAAAgAIQAAAAAAA=</HashCode>
+      <FileName>TesseractOcr\TesseractInstaller.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcr.TesseractLowLevelOcrService" BaseTypeListCollapsed="true">
+    <Position X="5" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAgQAAAABBAEAAAAAAAAAAAA=</HashCode>
+      <FileName>TesseractOcr\TesseractLowLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcr.TesseractMapper" Collapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TesseractOcr\TesseractMapper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcr.TesseractOcrService">
+    <Position X="5.25" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TesseractOcr\TesseractOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.TesseractOcr.TesseractResponse" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="18" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACBAAAABAAAAAAAAAAAAAAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>TesseractOcr\TesseractResponse.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcr.BoundingRect" Collapsed="true">
+    <Position X="12.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAABAAAAAAABAAQAEAAAAAIAAAACACAAAAAYAA=</HashCode>
+      <FileName>WindowsOcr\BoundingRect.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcr.OcrLine" Collapsed="true">
+    <Position X="20" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAACAAgAAA=</HashCode>
+      <FileName>WindowsOcr\OcrLine.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcr.WindowsLowLevelOcrService" BaseTypeListCollapsed="true">
+    <Position X="3.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAgBQAAACAgAAAAAAAAECYAAAABAAAAAAAAAAIIAAA=</HashCode>
+      <FileName>WindowsOcr\WindowsLowLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcr.WindowsOcrResult" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="12.25" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACBAAAABABAAAAAAAAAAAAAACAAAACAAAAAA=</HashCode>
+      <FileName>WindowsOcr\WindowsOcrResult.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcr.WindowsOcrService">
+    <Position X="0.5" Y="2.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>WindowsOcr\WindowsOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ocr.Wrapper.WindowsOcr.Word" Collapsed="true">
+    <Position X="21.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAABAAAAAAAAAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>WindowsOcr\Word.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="Ocr.Wrapper.IHighLevelOcrService&lt;T&gt;" Collapsed="true">
+    <Position X="0.5" Y="5.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IHighLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ocr.Wrapper.IGenericOcrRunner" Collapsed="true">
+    <Position X="0.5" Y="4.25" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IHighLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ocr.Wrapper.ILowLevelOcrService&lt;T&gt;">
+    <Position X="14" Y="7.75" Width="4" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ILowLevelOcrService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ocr.Wrapper.IMappableToGenericResponse">
+    <Position X="18.25" Y="7.75" Width="1.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IMappableToGenericResponse.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ocr.Wrapper.IOcrCache">
+    <Position X="19.75" Y="7.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAQAAAAAAABAAAAAAAAgAAAAAAAAAA=</HashCode>
+      <FileName>IOcrCache.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ocr.Wrapper.ImageManipulation.IImageCompressor">
+    <Position X="12" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>ImageManipulation\IImageCompressor.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="Ocr.Wrapper.TesseractOcr.ITesseractInstaller">
+    <Position X="22.5" Y="7.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAABAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TesseractOcr\ITesseractInstaller.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
