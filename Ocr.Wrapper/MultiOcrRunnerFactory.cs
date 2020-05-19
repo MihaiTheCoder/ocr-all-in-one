@@ -15,7 +15,7 @@ namespace Ocr.Wrapper
 {
     public class StandardMultiOcrRunnerFactory
     {
-        private readonly StandardOcrSettings settings;
+        public StandardOcrSettings Settings { get; }
         private readonly IOcrCache ocrCache;
         private readonly IImageCompressor imageCompressor;
 
@@ -33,14 +33,14 @@ namespace Ocr.Wrapper
 
         public StandardMultiOcrRunnerFactory(StandardOcrSettings settings, IOcrCache ocrCache)
         {
-            this.settings = settings;
+            this.Settings = settings;
             this.ocrCache = ocrCache;
             this.imageCompressor = settings.ImageCompressor;
         }
 
         public async Task<MultiOcrRunner> GetMultiOcrRunner()
         {
-            var standardOcrs = await GetStandardOcrs(ocrCache, settings, imageCompressor);
+            var standardOcrs = await GetStandardOcrs(ocrCache, Settings, imageCompressor);
             return new MultiOcrRunner(standardOcrs.ToArray());
         }
 
