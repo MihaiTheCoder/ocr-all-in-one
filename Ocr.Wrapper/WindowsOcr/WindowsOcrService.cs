@@ -2,7 +2,8 @@
 {
     public class WindowsOcrService : HighLevelOcrService<WindowsOcrResult, WindowsLowLevelOcrService>
     {
-        public WindowsOcrService(HighLevelOcrServiceParams ocrParams=null) : base(new WindowsLowLevelOcrService(), ocrParams)
+        public WindowsOcrService(HighLevelOcrServiceParams ocrParams=null) : 
+            base(new WindowsLowLevelOcrService(), ocrParams)
         {
         }
 

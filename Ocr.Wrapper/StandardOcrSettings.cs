@@ -1,3 +1,5 @@
+
+﻿using System.Configuration;
 ﻿using Ocr.Wrapper.ImageManipulation;
 using Ocr.Wrapper.TesseractOcr;
 using System;
@@ -31,6 +33,12 @@ namespace Ocr.Wrapper
 
     public class AzureOcrSettings
     {
+        public AzureOcrSettings()
+        {
+            SubscriptionKey = ConfigurationManager.AppSettings["azureSubscriptionKey"];
+            Endpoint = ConfigurationManager.AppSettings["azureEndpoint"];
+        }
+
         public AzureOcrSettings(string subscriptionKey, string endpoint)
         {
             SubscriptionKey = subscriptionKey;
@@ -57,6 +65,11 @@ namespace Ocr.Wrapper
 
     public class GoogleOcrSettings
     {
+        public GoogleOcrSettings()
+        {
+            ApiToken = ConfigurationManager.AppSettings["googleApiToken"];
+        }
+
         public GoogleOcrSettings(string apiToken)
         {
             ApiToken = apiToken;

@@ -22,6 +22,11 @@ namespace Ocr.Wrapper.TesseractOcr
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
         public TesseractLowLevelOcrService(string tesseractDir = TesseractInstaller.DefaultInstallDir, string dataDir = null)
         {
+            if(!Directory.Exists(tesseractDir))
+                tesseractDir = @"C:\Program Files (x86)\Tesseract-OCR";
+            if (!Directory.Exists(tesseractDir))
+                throw new DirectoryNotFoundException("Could not find tesseract dir " + tesseractDir);
+            
             // Tesseract configs.
             _tesseractExePath = Path.Combine(tesseractDir, "tesseract.exe");
 
