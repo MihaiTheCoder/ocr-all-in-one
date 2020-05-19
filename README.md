@@ -1,4 +1,4 @@
-![.NET Core](https://github.com/MihaiTheCoder/ocr-all-in-one/workflows/.NET%20Core/badge.svg)
+![publish to nuget](https://github.com/MihaiTheCoder/ocr-all-in-one/workflows/publish%20to%20nuget/badge.svg)
 # Ocr.Console
 Ocr.Console is a self hosted ASP.NET Web API that does OCR on ValuesController POST. After starting the server, we also do a mock test using HttpClient. The main code for doing the OCR is in  Ocr.Wrapper
 
