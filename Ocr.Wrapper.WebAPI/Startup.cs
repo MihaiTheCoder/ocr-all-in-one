@@ -40,7 +40,10 @@ namespace Ocr.Wrapper.WebAPI
             if (ConfigHasAllKeys("google:ApiToken"))
                 factory.Settings.GoogleOcrSettings = new GoogleOcrSettings(Configuration["google:ApiToken"]);
             if (ConfigHasAllKeys("aws:AccessKey", "aws:SecretKey"))
-                factory.Settings.AwsOcrSettings = new AwsOcrSettings(Configuration["aws:AccessKey"], Configuration["aws:SecretKey"]);
+            {
+
+                factory.Settings.AwsOcrSettings = new AwsOcrSettings(Configuration["aws:AccessKey"], Configuration["aws:SecretKey"], Configuration.GetValue<string>("aws:Region", null));
+            }
 
             services.AddSingleton(factory.GetMultiOcrRunner().Result);
             services.AddControllers();

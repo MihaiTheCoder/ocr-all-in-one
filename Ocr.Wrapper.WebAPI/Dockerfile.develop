@@ -1,0 +1,19 @@
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1
+ARG BUILD_CONFIGURATION=Debug
+ENV ASPNETCORE_ENVIRONMENT=Development
+ENV ASPNETCORE_URLS=http://+:80
+ENV DOTNET_USE_POLLING_FILE_WATCHER=true
+EXPOSE 80
+
+WORKDIR /src
+COPY ["Ocr.Wrapper.WebAPI/Ocr.Wrapper.WebAPI.csproj", "Ocr.Wrapper.WebAPI/"]
+COPY ["Ocr.Wrapper/Ocr.Wrapper.csproj", "Ocr.Wrapper/"]
+
+RUN dotnet restore "Ocr.Wrapper.WebAPI/Ocr.Wrapper.WebAPI.csproj"
+COPY . .
+WORKDIR "/src/Ocr.Wrapper.WebAPI"
+RUN dotnet build --no-restore "Ocr.Wrapper.WebAPI.csproj" -c $BUILD_CONFIGURATION
+
+RUN echo "exec dotnet run --no-build --no-launch-profile -c $BUILD_CONFIGURATION --" > /entrypoint.sh
+
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
