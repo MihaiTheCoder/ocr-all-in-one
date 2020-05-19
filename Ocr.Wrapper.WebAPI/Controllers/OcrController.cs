@@ -1,12 +1,9 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Ocr.Wrapper.WindowsOcr;
-using System.Linq;
 using Ocr.Wrapper.WebAPI.Services;
+using Ocr.Wrapper;
 
 namespace OcrFromConsole
 {
@@ -14,18 +11,18 @@ namespace OcrFromConsole
     [Route("[controller]")]
     public class OcrController : ControllerBase
     {
-        private readonly WindowsOcrService windowsOcrExecutor;
+        private readonly MultiOcrRunner multiOcrRunner;
 
-        public OcrController(WindowsOcrService windowsOcrExecutor)
+        public OcrController(MultiOcrRunner multiOcrRunner)
         {
-            this.windowsOcrExecutor = windowsOcrExecutor;
+            this.multiOcrRunner = multiOcrRunner;
         }
 
         [HttpPost("Windows")]
         public async Task<IActionResult> GetWindowsOcrResultsAsync(IFormFile file)
         {
             var results = await AspNetFileProcessorWrapper.ProcessFilesAsync(
-                filePath => windowsOcrExecutor.GetOcrResultAsync(filePath), 
+                filePath => multiOcrRunner.GetOcrByType< WindowsOcrService>().GetOcrResultAsync(filePath), 
                 file);
            
             return Ok(results[0]);
