@@ -16,7 +16,7 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
 {
     public class AwsOcrService: HighLevelOcrService<AwsOcrResponse, AwsLowLevelOcrService>
     {
-        public AwsOcrService(string accessKey, string secretKey, HighLevelOcrServiceParams ocrParams=null): base(new AwsLowLevelOcrService(accessKey, secretKey), ocrParams)
+        public AwsOcrService(string accessKey, string secretKey, string awsRegion=null, HighLevelOcrServiceParams ocrParams=null): base(new AwsLowLevelOcrService(accessKey, secretKey, awsRegion), ocrParams)
         {
             
         }

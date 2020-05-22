@@ -52,15 +52,17 @@ namespace Ocr.Wrapper
 
     public class AwsOcrSettings
     {
-        public AwsOcrSettings(string accessKey, string secretKey)
+        public AwsOcrSettings(string accessKey, string secretKey, string region=null)
         {
             AccessKey = accessKey;
             SecretKey = secretKey;
+            Region = region;
         }
 
         public string AccessKey { get; private set; }
 
         public string SecretKey { get; private set; }
+        public string Region { get; private set; }
     }
 
     public class GoogleOcrSettings

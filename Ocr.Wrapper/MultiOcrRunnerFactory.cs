@@ -53,7 +53,7 @@ namespace Ocr.Wrapper
             if (standardOcrSettings.AwsOcrSettings != null)
             {
                 var awsSettings = standardOcrSettings.AwsOcrSettings;
-                genericOcrRunners.Add(new AwsOcrService(awsSettings.AccessKey, awsSettings.SecretKey, ocrParams));
+                genericOcrRunners.Add(new AwsOcrService(awsSettings.AccessKey, awsSettings.SecretKey, awsSettings.Region, ocrParams));
             }
 
             if (standardOcrSettings.AzureOcrSettings != null)

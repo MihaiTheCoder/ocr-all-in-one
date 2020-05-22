@@ -1,4 +1,5 @@
-﻿using Amazon.Rekognition;
+﻿using Amazon;
+using Amazon.Rekognition;
 using Amazon.Rekognition.Model;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
     public class AwsLowLevelOcrService : ILowLevelOcrService<AwsOcrResponse>
     {
         AmazonRekognitionClient rekognitionClient;
-        public AwsLowLevelOcrService(string accessKey, string secretKey)
+        public AwsLowLevelOcrService(string accessKey, string secretKey, string region)
         {
-            rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey);
+            rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey, RegionEndpoint.GetBySystemName(region));
         }
 
         public string Name => nameof(AwsOcrService);
