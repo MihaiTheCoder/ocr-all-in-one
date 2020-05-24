@@ -39,7 +39,7 @@ namespace Ocr.Wrapper
 
             if (ocrParams.OcrCache != null)
             {
-                var cacheResult = await ocrParams.OcrCache.GetFromCache<TResponse>(inputImage, lowLevelOcrService.Name);
+                var cacheResult = await ocrParams.OcrCache.GetFromCache<TResponse>(inputImage, inputLanguage, lowLevelOcrService.Name);
 
                 if (cacheResult.Item1)
                     return cacheResult.Item2;
@@ -48,7 +48,7 @@ namespace Ocr.Wrapper
             var result = await lowLevelOcrService.GetOcrResultWithoutCacheAsync(inputImage, inputLanguage, runAnywayWithBadLanguage);
 
             if (ocrParams.OcrCache != null)
-                await ocrParams.OcrCache.SaveToCache(inputImage, lowLevelOcrService.Name, result);
+                await ocrParams.OcrCache.SaveToCache(inputImage, inputLanguage, lowLevelOcrService.Name, result);
 
             return result;
         }

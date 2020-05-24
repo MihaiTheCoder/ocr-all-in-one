@@ -128,6 +128,7 @@
     <Compile Include="ImageManipulation\IImageCompressor.cs" />
     <Compile Include="ImageManipulation\ImageMagickCompressor.cs" />
     <Compile Include="IMappableToGenericResponse.cs" />
+    <Compile Include="Language.cs" />
     <Compile Include="MultiOcrRunner.cs" />
     <Compile Include="GenericOcrResponse.cs" />
     <Compile Include="GoogleOcr\GoogleBoundingPoly.cs" />
