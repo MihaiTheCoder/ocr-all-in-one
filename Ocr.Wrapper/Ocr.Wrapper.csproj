@@ -16,11 +16,8 @@
   </ItemGroup>
 
   <ItemGroup>
-
     <None Update="Resources\Get-Text-Win-OCR.ps1">
-  </ItemGroup>
-  <ItemGroup>
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
