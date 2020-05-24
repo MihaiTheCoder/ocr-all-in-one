@@ -22,10 +22,12 @@ namespace Ocr.Wrapper.Tests
         [TestInitialize()]
         public async Task MultiOcrRunnerTestInitialize() 
         {
-            StandardOcrSettings standardOcrSettings = new StandardOcrSettings
-            {
+            StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
+            {                
+                WindowsOcrSettings = new WindowsOcrSettings(),
+                AzureOcrSettings = new AzureOcrSettings(),
+                GoogleOcrSettings = new GoogleOcrSettings(),
                 TesseractOcrSettings = new TesseractOcrSettings(),
-                WindowsOcrSettings = new WindowsOcrSettings()
             };
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
             multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath).GetMultiOcrRunner();

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Ocr.Wrapper
@@ -27,6 +28,16 @@ namespace Ocr.Wrapper
                 responses[ocr.Name] = await ocr.GetGenericOcrResultAsync(inputImagePath, language);
             }
             return responses;
+        }
+
+        public IGenericOcrRunner GetOcrByName(string ocrName)
+        {
+            return OcrRunners.FirstOrDefault(o => o.Name == ocrName);
+        }
+
+        public T GetOcrByType<T>() where T: class, IGenericOcrRunner
+        {
+            return OcrRunners.FirstOrDefault(ocr => ocr is T) as T;
         }
     }
 

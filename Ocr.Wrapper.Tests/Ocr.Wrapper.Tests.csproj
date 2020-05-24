@@ -64,6 +64,7 @@
     <Otherwise />
   </Choose>
   <ItemGroup>
+    <Compile Include="ImageMagickCompressorTests.cs" />
     <Compile Include="MultiOcrRunner.cs" />
     <Compile Include="OcrTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

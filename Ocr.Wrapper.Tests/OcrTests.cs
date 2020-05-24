@@ -9,6 +9,7 @@ using Ocr.Wrapper.TesseractOcr;
 using Ocr.Wrapper.GoogleOcr;
 using Ocr.Wrapper.AwsRekognitionOcr;
 using System.Configuration;
+using System.Collections.Generic;
 
 namespace Ocr.Wrapper.Tests
 {
@@ -22,8 +23,8 @@ namespace Ocr.Wrapper.Tests
             var endpoint = ConfigurationManager.AppSettings["azureEndpoint"];
 
 
-            AzureOcrExecutor azureOcrExecutor = new AzureOcrExecutor(subscriptionKey, endpoint);
-            var result = await azureOcrExecutor.GetOcrResultAsync(@"data/abc.JPG");
+            AzureOcrService azureOcrExecutor = new AzureOcrService(subscriptionKey, endpoint);
+            AzureOcrResults result = await azureOcrExecutor.GetOcrResultAsync(@"data/abc.JPG");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
             Assert.IsNotNull(genericResult);
@@ -32,8 +33,8 @@ namespace Ocr.Wrapper.Tests
         [TestMethod()]
         public async Task WindowsOcr()
         {
-            WindowsOcrExecutor windowsOcrExecutor = new WindowsOcrExecutor();
-            var result = await windowsOcrExecutor.GetOcrResultAsync(@"data/abc.JPG", "en");
+            WindowsOcrService windowsOcrExecutor = new WindowsOcrService();
+            WindowsOcrResult result = await windowsOcrExecutor.GetOcrResultAsync(@"data/abc.JPG", "en");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
             Assert.IsNotNull(genericResult);
@@ -42,8 +43,8 @@ namespace Ocr.Wrapper.Tests
         [TestMethod]
         public async Task Tesseract5()
         {
-            TesseractService tesseractService = new TesseractService();
-            var result = await tesseractService.GetOcrResultAsync(@"data/abc.JPG", "eng");
+            TesseractOcrService tesseractService = new TesseractOcrService();
+            TesseractResponse result = await tesseractService.GetOcrResultAsync(@"data/abc.JPG", "eng");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
             Assert.IsNotNull(genericResult);
@@ -55,7 +56,7 @@ namespace Ocr.Wrapper.Tests
             var apiToken = ConfigurationManager.AppSettings["googleApiToken"];
             GoogleOcrService googleOcrService = new GoogleOcrService(apiToken);
 
-            var result = await googleOcrService.GetOcrResultAsync(@"data/abc.JPG");
+            GoogleOcrResponse result = await googleOcrService.GetOcrResultAsync(@"data/abc.JPG");
             var descriptions = result.Responses.SelectMany(r => r.Annotations).ToList();
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -68,7 +69,7 @@ namespace Ocr.Wrapper.Tests
             var accessKey = ConfigurationManager.AppSettings["awsAccessKey"];
             var secretKey = ConfigurationManager.AppSettings["awsSecretKey"];
             AwsOcrService awsOcrService = new AwsOcrService(accessKey, secretKey);
-            var result = await awsOcrService.GetOcrResultAsync(@"data/abc.JPG");
+            AwsOcrResponse result = await awsOcrService.GetOcrResultAsync(@"data/abc.JPG");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
             Assert.IsNotNull(genericResult);
@@ -81,7 +82,7 @@ namespace Ocr.Wrapper.Tests
 
             MultiOcrRunner genericOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings)
                 .GetMultiOcrRunner();
-            var results = await genericOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
+            Dictionary<string, GenericOcrResponse> results = await genericOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
             Assert.IsNotNull(results);
         }
 
@@ -93,7 +94,7 @@ namespace Ocr.Wrapper.Tests
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
             MultiOcrRunner multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath)
                 .GetMultiOcrRunner();
-            var results = await multiOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
+            Dictionary<string, GenericOcrResponse> results = await multiOcrRunner.RunAllOcrEnginesOnImage(@"data/abc.JPG");
             Assert.IsNotNull(results);
         }
 
@@ -104,7 +105,7 @@ namespace Ocr.Wrapper.Tests
             var googleApiToken = ConfigurationManager.AppSettings["googleApiToken"];
             var awsAcessKey = ConfigurationManager.AppSettings["awsAccessKey"];
             var awsSecretKey = ConfigurationManager.AppSettings["awsSecretKey"];
-            StandardOcrSettings standardOcrSettings = new StandardOcrSettings
+            StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {
                 AwsOcrSettings = new AwsOcrSettings(awsAcessKey, awsSecretKey),
                 AzureOcrSettings = new AzureOcrSettings(azureSubscriptionKey, azureEndpoint),

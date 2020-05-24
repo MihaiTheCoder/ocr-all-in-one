@@ -22,7 +22,7 @@ namespace Ocr.Wrapper.GoogleOcr
                     {
                         foreach (var vertice in boundingPoly.Value)
                         {
-                            googleTextAnnotation.BoundingPoly.Add(new GoogleVertice { X = vertice.x, Y = vertice.y });
+                            googleTextAnnotation.BoundingPoly.Add(new GoogleVertice { X = vertice.x ?? -1, Y = vertice.y ?? -1 });
                         }                        
                     }
                     singleOcrResponse.Annotations.Add(googleTextAnnotation);

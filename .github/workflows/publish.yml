@@ -1,0 +1,32 @@
+name: publish to nuget
+on:
+  push:
+    branches:
+      - master # Default release branch
+jobs:
+  publish:
+    name: build, pack & publish
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+      name: Checkout Code
+     
+    - name: Setup MSBuild Path
+      uses: warrenbuckley/Setup-MSBuild@v1
+      with:
+        nuget-api-key-source: ${{secrets.NUGET_API_KEY}}
+       
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0.2
+     
+    - name: Restore NuGet Packages
+      run: nuget restore Ocr.sln
+ 
+    - name: Build
+      run: msbuild Ocr.sln /p:Configuration=Release    
+
+    - name: Generate nuget package
+      run: nuget pack Ocr.Wrapper -Properties Configuration=Release
+      
+    - name: Publish package
+      run: nuget push Ocr.Wrapper.1.0.0.nupkg ${{secrets.NUGET_API_KEY}} -Source https://api.nuget.org/v3/index.json -SkipDuplicate
