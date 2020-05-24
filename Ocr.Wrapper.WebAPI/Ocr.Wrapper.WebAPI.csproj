@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
+	<RestoreProjectStyle>PackageReference</RestoreProjectStyle>
     <UserSecretsId>68223d3d-668d-4526-8c44-fda35bdda802</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>

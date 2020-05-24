@@ -15,7 +15,11 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
         AmazonRekognitionClient rekognitionClient;
         public AwsLowLevelOcrService(string accessKey, string secretKey, string region)
         {
-            rekognitionClient = new AmazonRekognitionClient(accessKey, secretKey, RegionEndpoint.GetBySystemName(region));
+
+            rekognitionClient = new AmazonRekognitionClient(
+                                        accessKey, 
+                                        secretKey, 
+                                        region == null ? null : RegionEndpoint.GetBySystemName(region));
         }
 
         public string Name => nameof(AwsOcrService);
