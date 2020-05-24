@@ -1,0 +1,1 @@
+﻿"C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.8 Tools\svcutil.exe" /language:C# /dataContractOnly /importxmltypes /s /serializer:DataContractSerializer /noStdLib /tcv:Version35 /out:AltoFormat2.cs alto_4_1.xsd xlink.xsd

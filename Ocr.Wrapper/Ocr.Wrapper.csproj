@@ -86,6 +86,7 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.6.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Text.Encodings.Web, Version=4.0.5.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Text.Encodings.Web.4.7.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
     </Reference>
@@ -157,6 +158,30 @@
     <Compile Include="TesseractOcr\TesseractMapper.cs" />
     <Compile Include="TesseractOcr\TesseractOcrService.cs" />
     <Compile Include="TesseractOcr\TesseractResponse.cs" />
+    <Compile Include="ToAlto\ALTERNATIVEType.cs" />
+    <Compile Include="ToAlto\altoType.cs" />
+    <Compile Include="ToAlto\BlockType.cs" />
+    <Compile Include="ToAlto\ComposedBlockType.cs" />
+    <Compile Include="ToAlto\DescriptionType.cs" />
+    <Compile Include="ToAlto\GlyphType.cs" />
+    <Compile Include="ToAlto\GraphicalElementType.cs" />
+    <Compile Include="ToAlto\IllustrationType.cs" />
+    <Compile Include="ToAlto\LayoutType.cs" />
+    <Compile Include="ToAlto\MeasurementUnitType.cs" />
+    <Compile Include="ToAlto\OcrProcessingType.cs" />
+    <Compile Include="ToAlto\PageSpaceType.cs" />
+    <Compile Include="ToAlto\PageType.cs" />
+    <Compile Include="ToAlto\PositionType.cs" />
+    <Compile Include="ToAlto\ProcessingSoftwareType.cs" />
+    <Compile Include="ToAlto\ProcessingStepType.cs" />
+    <Compile Include="ToAlto\QualityType.cs" />
+    <Compile Include="ToAlto\ShapeType.cs" />
+    <Compile Include="ToAlto\SourceImageInformationType.cs" />
+    <Compile Include="ToAlto\SPType.cs" />
+    <Compile Include="ToAlto\stringType.cs" />
+    <Compile Include="ToAlto\SUBSTYPEType.cs" />
+    <Compile Include="ToAlto\TextBlockType.cs" />
+    <Compile Include="ToAlto\xsd\AltoFormat.cs" />
     <Compile Include="WindowsOcr\BoundingRect.cs" />
     <Compile Include="WindowsOcr\WindowsLowLevelOcrService.cs" />
     <Compile Include="WindowsOcr\OcrLine.cs" />
@@ -170,6 +195,13 @@
     <EmbeddedResource Include="Resources\Get-Text-Win-OCR.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <None Include="ToAlto\xsd\alto_4_1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="ToAlto\xsd\gen_AltoFormat.bat" />
+    <None Include="ToAlto\xsd\xlink.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Resources.resx">
