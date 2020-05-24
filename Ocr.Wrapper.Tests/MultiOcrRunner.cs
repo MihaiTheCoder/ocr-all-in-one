@@ -39,9 +39,9 @@ namespace Ocr.Wrapper.Tests
         public async Task RunAll()
         {
             var filePath = "data/TLCShot.png";
-            var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath);
+            var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath, Language.English);
 
-            Assert.IsNotNull(result);
+               Assert.IsNotNull(result);
         }        
     }
 }
