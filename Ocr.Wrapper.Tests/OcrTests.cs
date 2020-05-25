@@ -68,7 +68,8 @@ namespace Ocr.Wrapper.Tests
         {
             var accessKey = ConfigurationManager.AppSettings["awsAccessKey"];
             var secretKey = ConfigurationManager.AppSettings["awsSecretKey"];
-            AwsOcrService awsOcrService = new AwsOcrService(accessKey, secretKey);
+            var awsRegion = ConfigurationManager.AppSettings["awsRegion"];
+            AwsOcrService awsOcrService = new AwsOcrService(accessKey, secretKey, awsRegion);
             AwsOcrResponse result = await awsOcrService.GetOcrResultAsync(@"data/abc.JPG");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
