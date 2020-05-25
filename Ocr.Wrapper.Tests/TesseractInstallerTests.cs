@@ -9,12 +9,12 @@ namespace Ocr.Wrapper.Tests
     [TestClass]
     public class TesseractInstallerTests
     {
-        TesseractInstaller installer;
+        WindowsTesseractInstaller installer;
 
         [TestInitialize()]
         public void Setup()
         {
-            installer = new TesseractInstaller();
+            installer = new WindowsTesseractInstaller();
         }
 
         [TestMethod]

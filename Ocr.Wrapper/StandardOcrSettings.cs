@@ -83,17 +83,17 @@ namespace Ocr.Wrapper
     public class TesseractOcrSettings
     {
 
-        public TesseractOcrSettings(string tesseractDir = TesseractInstaller.DefaultInstallDir, string dataDir = null,
+        public TesseractOcrSettings(string tesseractExecutable = null, string dataDir = null,
             bool shouldTryToAutomaticallInstall=true)
         {            
-            TesseractDir = tesseractDir;
+            TesseractExecutable = tesseractExecutable;
             DataDir = dataDir;
             ShouldTryToAutomaticallInstall = shouldTryToAutomaticallInstall;
-            if (!ShouldTryToAutomaticallInstall && !Directory.Exists(tesseractDir))
-                throw new ArgumentException($"Provided path to tesseract -{tesseractDir}- dir does not exist and TesseractInstaller is not set.");
+            //if (!ShouldTryToAutomaticallInstall && !Directory.Exists(tesseractExecutable))
+            //    throw new ArgumentException($"Provided path to tesseract -{tesseractExecutable}- dir does not exist and TesseractInstaller is not set.");
         }
 
-        public string TesseractDir { get; set; }
+        public string TesseractExecutable { get; set; }
 
         public string DataDir { get; set; }
         public bool ShouldTryToAutomaticallInstall { get; }

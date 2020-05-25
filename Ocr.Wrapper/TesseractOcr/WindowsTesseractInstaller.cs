@@ -1,35 +1,37 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
-using System.Linq;
-using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Ocr.Wrapper.TesseractOcr
 {
-    public class TesseractInstaller : ITesseractInstaller
+    public class WindowsTesseractInstaller : ITesseractInstaller
     {
-        const string webAddress = "https://github.com/MihaiTheCoder/TeseractBinariesZip/blob/master/Tesseract-OCR.zip?raw=true";
-        public const string DefaultInstallDir = @"/Tesseract";
+        const string webAddress = "https://github.com/MihaiTheCoder/TeseractBinariesZip/blob/master/Tesseract-OCR.zip?raw=true";        
         public const string TesseractExeFileName = "tesseract.exe";
-        public string TesseractExePath { get { return Path.Combine(TesseractInstallDir, TesseractExeFileName); } }
+        public const string DefaultInstalledPath = @"/Tesseract/" + TesseractExeFileName;        
 
         public string TesseractInstallDir { get; }
 
-        public TesseractInstaller(string tesseractInstallDir = DefaultInstallDir)
+        public string TesseractExePath { get; }
+
+        public WindowsTesseractInstaller(string tesseractExecutable = DefaultInstalledPath)
         {
-            TesseractInstallDir = tesseractInstallDir;
+            if (tesseractExecutable == null)
+                tesseractExecutable = @"C:\Program Files (x86)\Tesseract-OCR\" + TesseractExeFileName;
+
+            if (!File.Exists(tesseractExecutable))
+                tesseractExecutable = DefaultInstalledPath;                
+
+
+            TesseractInstallDir = Directory.GetParent(tesseractExecutable).FullName;
+            TesseractExePath = tesseractExecutable;
         }
 
         public async Task Install()
         {
-            var finalExePath = Path.Combine(TesseractInstallDir, TesseractExeFileName);
-
-            if (File.Exists(finalExePath))
+            if (File.Exists(TesseractExePath))
                 return;
 
             if (Directory.Exists(TesseractInstallDir))
