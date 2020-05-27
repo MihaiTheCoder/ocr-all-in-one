@@ -142,8 +142,9 @@ private static StandardOcrSettings GetStandardOcrSettings()
 }
 ```
 # Ocr.Wrapper.WebAPI
-Web API project configured to run all OCR engines. (Tested with IISExpress or local user run)
+Web API project configured to run all OCR engines. (Tested with IISExpress/local run/windows docker/linux docker)
 Default page is the Swagger UI that helps to invoke the API.
+
 
 In order to configure all Cloud services set the following values in user secrets: "azure:SubscriptionKey", "azure:Endpoint",
 "google:ApiToken", "aws:AccessKey","aws:SecretKey"
