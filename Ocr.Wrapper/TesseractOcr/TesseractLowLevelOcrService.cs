@@ -18,23 +18,22 @@ namespace Ocr.Wrapper.TesseractOcr
         /// <summary>
         /// Initializes a new instance of the <see cref="TesseractService"/> class.
         /// </summary>
-        /// <param name="tesseractDir">The path for the Tesseract4 installation folder using our own installer, or using the standard installer (C:\Program Files\Tesseract-OCR).</param>        
+        /// <param name="tesseractExePath">The path for the Tesseract4 installation folder using our own installer, or using the standard installer (C:\Program Files\Tesseract-OCR).</param>        
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
-        public TesseractLowLevelOcrService(string tesseractDir = TesseractInstaller.DefaultInstallDir, string dataDir = null)
+        public TesseractLowLevelOcrService(string tesseractExePath = WindowsTesseractInstaller.DefaultInstalledPath, string dataDir = null)
         {
-            var winTesseractDir = @"C:\Program Files (x86)\Tesseract-OCR";
-            if (!Directory.Exists(winTesseractDir))
-                _tesseractExePath = "tesseract";
+            var tesseractDirectory = Directory.GetParent(tesseractExePath).FullName;            
+            if (!DoesTesseractExist(tesseractExePath))
+                throw new DirectoryNotFoundException("Could not find tesseract dir " + tesseractExePath);
+            
+            // Tesseract configs.
+            _tesseractExePath = tesseractExePath;
 
-            if (Directory.Exists(winTesseractDir))
-            {
-                _tesseractExePath = Path.Combine(winTesseractDir, "tesseract.exe");
-            }
+            if (string.IsNullOrEmpty(dataDir) && tesseractDirectory != Directory.GetCurrentDirectory())
+                dataDir = Path.Combine(tesseractDirectory, "tessdata");
 
-            if (String.IsNullOrEmpty(dataDir))
-                dataDir = Path.Combine(winTesseractDir, "tessdata");
-
-            Environment.SetEnvironmentVariable("TESSDATA_PREFIX", dataDir);
+            if (dataDir != null)
+                Environment.SetEnvironmentVariable("TESSDATA_PREFIX", dataDir);
         }
 
         public async Task<TesseractResponse> GetOcrResultWithoutCacheAsync(string inputFilePath, string language, bool runAnywayWithBadLanguage = true)
@@ -54,7 +53,10 @@ namespace Ocr.Wrapper.TesseractOcr
             }
         }
 
-        private async Task<TesseractResponse> RunTesseract(string tempPath, string inputFile, string language)
+        private async Task<TesseractResponse> RunTesseract(
+            string tempPath, 
+            string inputFile, 
+            string language)
         {
             var tempOutputFile = NewTempFileName(tempPath);
 
@@ -72,6 +74,27 @@ namespace Ocr.Wrapper.TesseractOcr
 
             string output = File.ReadAllText(tempOutputFile + ".tsv");
             return TesseractMapper.Get(output, inputFile, Name);
+        }
+
+        private bool DoesTesseractExist(string tesseractExePath) 
+        {
+            try 
+            {
+                var info = new ProcessStartInfo
+                {
+                    FileName = tesseractExePath,
+                    Arguments = $"-v",
+                    RedirectStandardError = true,
+                    RedirectStandardOutput = true,
+                    CreateNoWindow = true,
+                    UseShellExecute = false
+                };
+                var result = RunProcessAsync(info).Result;
+                return result == 0;
+            } catch (Exception e) 
+            {
+                return false;
+            }
         }
 
         static Task<int> RunProcessAsync(ProcessStartInfo startInfo)

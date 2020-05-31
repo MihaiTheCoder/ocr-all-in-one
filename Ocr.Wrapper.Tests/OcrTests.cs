@@ -43,7 +43,9 @@ namespace Ocr.Wrapper.Tests
         [TestMethod]
         public async Task Tesseract5()
         {
-            TesseractOcrService tesseractService = new TesseractOcrService();
+            TesseractOcrService tesseractService = new TesseractOcrService(
+                tesseractInstalledPath: @"C:\Program Files (x86)\Tesseract-OCR\tesseract.exe");
+
             TesseractResponse result = await tesseractService.GetOcrResultAsync(@"data/abc.JPG", "eng");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -68,7 +70,8 @@ namespace Ocr.Wrapper.Tests
         {
             var accessKey = ConfigurationManager.AppSettings["awsAccessKey"];
             var secretKey = ConfigurationManager.AppSettings["awsSecretKey"];
-            AwsOcrService awsOcrService = new AwsOcrService(accessKey, secretKey);
+            var awsRegion = ConfigurationManager.AppSettings["awsRegion"];
+            AwsOcrService awsOcrService = new AwsOcrService(accessKey, secretKey, awsRegion);
             AwsOcrResponse result = await awsOcrService.GetOcrResultAsync(@"data/abc.JPG");
             Assert.IsNotNull(result);
             GenericOcrResponse genericResult = result.Map();
@@ -107,9 +110,9 @@ namespace Ocr.Wrapper.Tests
             var awsSecretKey = ConfigurationManager.AppSettings["awsSecretKey"];
             StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {
-                AwsOcrSettings = new AwsOcrSettings(awsAcessKey, awsSecretKey),
-                AzureOcrSettings = new AzureOcrSettings(azureSubscriptionKey, azureEndpoint),
-                GoogleOcrSettings = new GoogleOcrSettings(googleApiToken),
+                //AwsOcrSettings = new AwsOcrSettings(awsAcessKey, awsSecretKey),
+                //AzureOcrSettings = new AzureOcrSettings(azureSubscriptionKey, azureEndpoint),
+                //GoogleOcrSettings = new GoogleOcrSettings(googleApiToken),
                 TesseractOcrSettings = new TesseractOcrSettings(),
                 WindowsOcrSettings = new WindowsOcrSettings()
             };

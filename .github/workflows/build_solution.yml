@@ -21,7 +21,10 @@ jobs:
      
     - name: Restore NuGet Packages
       run: nuget restore Ocr.sln
- 
+    
+    - name: Restore NuGet Packages for Tests
+      run: nuget restore Ocr.Wrapper.Tests/Ocr.Wrapper.Tests.csproj
+      
     - name: Build
       run: msbuild Ocr.sln /p:Configuration=Release
  

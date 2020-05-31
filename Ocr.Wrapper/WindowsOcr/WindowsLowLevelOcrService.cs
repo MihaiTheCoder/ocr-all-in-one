@@ -37,13 +37,16 @@ namespace Ocr.Wrapper.WindowsOcr
         /// <returns></returns>
         private string GetResourceText(string fileName)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            var manifestName = assembly.GetManifestResourceNames().Single(man => man.EndsWith(fileName));
-            using (Stream stream = assembly.GetManifestResourceStream(manifestName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+            var dir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            return File.ReadAllText(Path.Combine(dir, "Resources\\Get-Text-Win-OCR.ps1"));
+
+            //var assembly = Assembly.GetExecutingAssembly();
+            //var manifestName = assembly.GetManifestResourceNames().Single(man => man.EndsWith(fileName));
+            //using (Stream stream = assembly.GetManifestResourceStream(manifestName))
+            //using (StreamReader reader = new StreamReader(stream))
+            //{
+            //    return reader.ReadToEnd();
+            //}
         }
 
         /// <summary>

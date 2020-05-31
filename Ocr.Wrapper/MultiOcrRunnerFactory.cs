@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Amazon.Rekognition.Model;
@@ -69,18 +70,23 @@ namespace Ocr.Wrapper
             }
 
             if (standardOcrSettings.TesseractOcrSettings != null)
-            {                
+            {
                 var tesseractSettings = standardOcrSettings.TesseractOcrSettings;
-                if (tesseractSettings.ShouldTryToAutomaticallInstall)
+
+                if (tesseractSettings.ShouldTryToAutomaticallInstall && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                 {
-                    ITesseractInstaller tesseractInstaller = new TesseractInstaller(tesseractSettings.TesseractDir);
+                    var tesseractInstaller = new WindowsTesseractInstaller(tesseractSettings.TesseractExecutable);
                     await tesseractInstaller.Install();
                     tesseractSettings.Installer = tesseractInstaller;
+                    tesseractSettings.TesseractExecutable = tesseractInstaller.TesseractExePath;
                 }
-                genericOcrRunners.Add(new TesseractOcrService(tesseractSettings.TesseractDir, tesseractSettings.DataDir, ocrParams));
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+                    tesseractSettings.TesseractExecutable = "tesseract";
+                    
+                 genericOcrRunners.Add(new TesseractOcrService(tesseractSettings.TesseractExecutable, tesseractSettings.DataDir, ocrParams));
             }
 
-            if (standardOcrSettings.WindowsOcrSettings != null)
+            if (standardOcrSettings.WindowsOcrSettings != null && RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 genericOcrRunners.Add(new WindowsOcrService(ocrParams));
             }
