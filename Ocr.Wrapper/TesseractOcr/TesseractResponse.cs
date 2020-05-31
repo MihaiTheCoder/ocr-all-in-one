@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Ocr.Wrapper.TesseractOcr
 {
@@ -8,6 +9,10 @@ namespace Ocr.Wrapper.TesseractOcr
         public TesseractDetectionLine[] DetectionLines { get; set; }
 
         public string Language { get; set; }
+
+        public string ImageFileName { get; set; }
+
+        public string SoftwareName { get; set; }
 
         public GenericOcrResponse Map()
         {
@@ -19,8 +24,21 @@ namespace Ocr.Wrapper.TesseractOcr
             return new GenericOcrResponse
             {
                 SummaryText = String.Join(" ", tesseractResponse.DetectionLines.Select(dl => dl.Text)),
-                Detections = tesseractResponse.DetectionLines.Select(dl => Get(dl)).ToList(),
-                Language = tesseractResponse.Language
+                Lines = tesseractResponse.DetectionLines.Select(dl => Map(dl)).ToList(),
+                Language = tesseractResponse.Language,
+                SoftwareName = tesseractResponse.SoftwareName,
+                ImageFileName = tesseractResponse.ImageFileName
+            };
+        }
+
+        public static GenericOcrLine Map(TesseractDetectionLine line)
+        {
+            return new GenericOcrLine()
+            {
+                Words = new List<GenericBoxDetection>()
+                {
+                    Get(line)
+                }
             };
         }
 

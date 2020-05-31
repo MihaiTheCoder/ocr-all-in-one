@@ -30,8 +30,19 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
             var response = new GenericOcrResponse();
             response.SummaryText = string.Join(" ", awsResponse.TextDetections.Select(td => td.DetectedText));
 
-            response.Detections = awsResponse.TextDetections.Select(td => Get(td)).ToList();
+            response.Lines = awsResponse.TextDetections.Select(td => Map(td)).ToList();
             return response;
+        }
+
+        public static GenericOcrLine Map(AwsTextDetection textDetection)
+        {
+            return new GenericOcrLine()
+            {
+                Words = new List<GenericBoxDetection>()
+                {
+                    Get(textDetection)
+                }
+            };
         }
 
         private static GenericBoxDetection Get(AwsTextDetection awsGeometry)

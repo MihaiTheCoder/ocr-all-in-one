@@ -72,7 +72,7 @@ namespace Ocr.Wrapper.AzureOcr
 
                 // Asynchronously get the JSON response.
                 string contentString = await response.Content.ReadAsStringAsync();
-                return AzureOcrResults.FromDynamic(JToken.Parse(contentString) as dynamic);
+                return AzureOcrResults.FromDynamic(JToken.Parse(contentString) as dynamic, imageFilePath, Name);
             }
             catch (Exception e)
             {

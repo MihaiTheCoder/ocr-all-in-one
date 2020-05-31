@@ -9,7 +9,7 @@ namespace Ocr.Wrapper.TesseractOcr
 {
     public class TesseractMapper
     {
-        public static TesseractResponse Get(string tsvResult)
+        public static TesseractResponse Get(string tsvResult, string inputFileName, string ocrName)
         {
             string[] lines = tsvResult.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
                 .Where(l => !string.IsNullOrWhiteSpace(l))
@@ -41,6 +41,9 @@ namespace Ocr.Wrapper.TesseractOcr
             response.DetectionLines = response.DetectionLines
                 .Where(d => !string.IsNullOrWhiteSpace(d?.Text) && d.Confidence > 0)
                 .ToArray();
+
+            response.ImageFileName = inputFileName;
+            response.SoftwareName = ocrName;
             return response;
         }
     }

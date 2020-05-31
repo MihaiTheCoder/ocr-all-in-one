@@ -4,7 +4,7 @@ namespace Ocr.Wrapper.GoogleOcr
 {
     public class GoogleOcrResponseMapper
     {
-        internal static GoogleOcrResponse FromDynamic(dynamic googleResult)
+        internal static GoogleOcrResponse FromDynamic(dynamic googleResult, string inputFileName, string ocrName)
         {
             GoogleOcrResponse googleOcrResponse = new GoogleOcrResponse();
             googleOcrResponse.Responses = new List<GoogleOcrSingleResponse>();
@@ -29,6 +29,8 @@ namespace Ocr.Wrapper.GoogleOcr
                 }
                 googleOcrResponse.Responses.Add(singleOcrResponse);
             }
+            googleOcrResponse.ImageFileName = inputFileName;
+            googleOcrResponse.SoftwareName = ocrName;
             return googleOcrResponse;
         }
     }

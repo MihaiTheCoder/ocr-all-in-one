@@ -161,6 +161,7 @@
     <Compile Include="ToAlto\altoType.cs" />
     <Compile Include="ToAlto\BlockType.cs" />
     <Compile Include="ToAlto\ComposedBlockType.cs" />
+    <Compile Include="ToAlto\ConvertToAlto.cs" />
     <Compile Include="ToAlto\DescriptionType.cs" />
     <Compile Include="ToAlto\GlyphType.cs" />
     <Compile Include="ToAlto\GraphicalElementType.cs" />

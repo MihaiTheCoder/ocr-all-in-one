@@ -22,16 +22,17 @@ namespace Ocr.Wrapper.TesseractOcr
         /// <param name="dataDir">The data with the trained models (tessdata). Download the models from https://github.com/tesseract-ocr/tessdata_fast</param>
         public TesseractLowLevelOcrService(string tesseractDir = TesseractInstaller.DefaultInstallDir, string dataDir = null)
         {
-            if(!Directory.Exists(tesseractDir))
-                tesseractDir = @"C:\Program Files (x86)\Tesseract-OCR";
-            if (!Directory.Exists(tesseractDir))
-                throw new DirectoryNotFoundException("Could not find tesseract dir " + tesseractDir);
-            
-            // Tesseract configs.
-            _tesseractExePath = Path.Combine(tesseractDir, "tesseract.exe");
+            var winTesseractDir = @"C:\Program Files (x86)\Tesseract-OCR";
+            if (!Directory.Exists(winTesseractDir))
+                _tesseractExePath = "tesseract";
+
+            if (Directory.Exists(winTesseractDir))
+            {
+                _tesseractExePath = Path.Combine(winTesseractDir, "tesseract.exe");
+            }
 
             if (String.IsNullOrEmpty(dataDir))
-                dataDir = Path.Combine(tesseractDir, "tessdata");
+                dataDir = Path.Combine(winTesseractDir, "tessdata");
 
             Environment.SetEnvironmentVariable("TESSDATA_PREFIX", dataDir);
         }
@@ -70,7 +71,7 @@ namespace Ocr.Wrapper.TesseractOcr
             await RunProcessAsync(info);
 
             string output = File.ReadAllText(tempOutputFile + ".tsv");
-            return TesseractMapper.Get(output);
+            return TesseractMapper.Get(output, inputFile, Name);
         }
 
         static Task<int> RunProcessAsync(ProcessStartInfo startInfo)

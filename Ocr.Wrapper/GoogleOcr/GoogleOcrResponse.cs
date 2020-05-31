@@ -6,6 +6,9 @@ namespace Ocr.Wrapper.GoogleOcr
     public class GoogleOcrResponse: IMappableToGenericResponse
     {
         public List<GoogleOcrSingleResponse> Responses { get; set; }
+        public string ImageFileName { get; set; }
+        public string SoftwareName { get; set; }
+
 
         public GenericOcrResponse Map()
         {
@@ -24,8 +27,22 @@ namespace Ocr.Wrapper.GoogleOcr
             return new GenericOcrResponse
             {
                 Language = language,
-                Detections = firstResponse.Annotations.Select(a => Get(a)).ToList(),
-                SummaryText = summaryText
+                Lines = firstResponse.Annotations.Select(a => Map(a)).ToList(),
+                SummaryText = summaryText,
+                ImageFileName = ocrResponse.ImageFileName,
+                SoftwareName = ocrResponse.SoftwareName
+            };
+        }
+
+
+        public static GenericOcrLine Map(GoogleTextAnnotation a)
+        {
+            return new GenericOcrLine()
+            {
+                Words = new List<GenericBoxDetection>()
+                {
+                    Get(a)
+                }
             };
         }
 

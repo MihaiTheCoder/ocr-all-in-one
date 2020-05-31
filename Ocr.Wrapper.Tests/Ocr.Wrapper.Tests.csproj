@@ -75,6 +75,7 @@
     </Compile>
     <Compile Include="TesseractInstallerTests.cs" />
     <Compile Include="ToAlto\SerializeDeserializeAlto.cs" />
+    <Compile Include="ToAlto\GenericResponseToAltoTests.cs" />
     <Compile Include="WindowsOcrExecutorTests.cs" />
   </ItemGroup>
   <ItemGroup>

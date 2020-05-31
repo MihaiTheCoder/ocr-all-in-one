@@ -21,9 +21,9 @@ namespace Ocr.Wrapper.Tests
             StandardOcrSettings standardOcrSettings = new StandardOcrSettings(true)
             {                
                 WindowsOcrSettings = new WindowsOcrSettings(),
-                AzureOcrSettings = new AzureOcrSettings(),
+                //AzureOcrSettings = new AzureOcrSettings(),
                 GoogleOcrSettings = new GoogleOcrSettings(),
-                TesseractOcrSettings = new TesseractOcrSettings(),
+                //TesseractOcrSettings = new TesseractOcrSettings(),
             };
             var fullPath = Path.GetFullPath(@"..\Data\Cache\");
             multiOcrRunner = await new StandardMultiOcrRunnerFactory(standardOcrSettings, fullPath).GetMultiOcrRunner();
@@ -35,7 +35,7 @@ namespace Ocr.Wrapper.Tests
         public async Task RunAll()
         {
             var filePath = "data/TLCShot.png";
-            var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath);
+            var result = await multiOcrRunner.RunAllOcrEnginesOnImage(filePath, "English");
 
             Assert.IsNotNull(result);
         }        
