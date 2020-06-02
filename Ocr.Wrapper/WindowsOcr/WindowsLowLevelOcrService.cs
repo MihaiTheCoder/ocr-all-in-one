@@ -90,7 +90,7 @@ namespace Ocr.Wrapper.WindowsOcr
 
             var debugOutput = debugPsOutput.ToString();
 
-            var firstResult = WindowsOcrResult.FromDynamic(result[0] as dynamic);
+            var firstResult = WindowsOcrResult.FromDynamic(result[0] as dynamic, imagePath, Name);
             return firstResult;
         }
 

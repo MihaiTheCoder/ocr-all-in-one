@@ -47,11 +47,10 @@ namespace Ocr.Wrapper.GoogleOcr
             string url = $"{ocrPostUrl}?key={apiToken}";
             var response = await client.PostAsync(url, content);
             string contentString = await response.Content.ReadAsStringAsync();
-
             if (!response.IsSuccessStatusCode)
                 throw new Exception(contentString);
 
-            return GoogleOcrResponseMapper.FromDynamic(JToken.Parse(contentString) as dynamic);
+            return GoogleOcrResponseMapper.FromDynamic(JToken.Parse(contentString) as dynamic, filePath, Name);
         }
     }
 }

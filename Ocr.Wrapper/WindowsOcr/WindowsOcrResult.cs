@@ -10,8 +10,10 @@ namespace Ocr.Wrapper.WindowsOcr
         public List<OcrLine> Lines { get; set; }
 
         public string Language { get; set; }
+        public string ImageFileName { get; set; }
+        public string SoftwareName { get; set; }
 
-        public static WindowsOcrResult FromDynamic(dynamic ocrResult)
+        public static WindowsOcrResult FromDynamic(dynamic ocrResult, string inputFileName, string ocrName)
         {
             var result = new WindowsOcrResult();
             result.Lines = new List<OcrLine>();
@@ -20,7 +22,8 @@ namespace Ocr.Wrapper.WindowsOcr
                 result.Lines.Add(OcrLine.FromDynamic(line));
             }
             result.Text = ocrResult.Text;
-            
+            result.ImageFileName = inputFileName;
+            result.SoftwareName = ocrName;
             return result;
         }
 
@@ -35,9 +38,19 @@ namespace Ocr.Wrapper.WindowsOcr
             {
                 SummaryText = ocrResult.Text,
                 Language = ocrResult.Language,
-                Detections = ocrResult.Lines.SelectMany(l => l.Words).Select(w => Get(w)).ToList()
+                Lines = ocrResult.Lines.Select(l => Map(l)).ToList(),
+                ImageFileName = ocrResult.ImageFileName,
+                SoftwareName = ocrResult.SoftwareName
             };
         }
+        public static GenericOcrLine Map(OcrLine line)
+        {
+            return new GenericOcrLine()
+            {
+                Words = line.Words.Select(w => Get(w)).ToList()
+            };
+        }
+
 
         private static GenericBoxDetection Get(Word w)
         {

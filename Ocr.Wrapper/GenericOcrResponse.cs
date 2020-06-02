@@ -17,7 +17,16 @@ namespace Ocr.Wrapper
 
         public string Language { get; set; }
 
-        public List<GenericBoxDetection> Detections { get; set; }        
+        public string ImageFileName { get; set; }
+
+        public string SoftwareName { get; set; }
+
+        public List<GenericOcrLine> Lines { get; set; }
+    }
+
+    public class GenericOcrLine
+    {
+        public List<GenericBoxDetection> Words { get; set; }
     }
 
     public class GenericBoxDetection

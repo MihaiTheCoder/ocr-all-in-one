@@ -53,7 +53,10 @@ namespace Ocr.Wrapper.TesseractOcr
             }
         }
 
-        private async Task<TesseractResponse> RunTesseract(string tempPath, string inputFile, string language)
+        private async Task<TesseractResponse> RunTesseract(
+            string tempPath, 
+            string inputFile, 
+            string language)
         {
             var tempOutputFile = NewTempFileName(tempPath);
 
@@ -70,7 +73,7 @@ namespace Ocr.Wrapper.TesseractOcr
             await RunProcessAsync(info);
 
             string output = File.ReadAllText(tempOutputFile + ".tsv");
-            return TesseractMapper.Get(output);
+            return TesseractMapper.Get(output, inputFile, Name);
         }
 
         private bool DoesTesseractExist(string tesseractExePath) 

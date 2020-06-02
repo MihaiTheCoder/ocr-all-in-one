@@ -14,15 +14,21 @@ namespace Ocr.Wrapper.AzureOcr
 
         public string Orientation { get; set; }
 
+        public string ImageFileName { get; set; }
+
+        public string SoftwareName { get; set; }
+
         public List<AzureOcrRegion> Regions { get; set; }
 
-        public static AzureOcrResults FromDynamic(dynamic ocrResult)
+        public static AzureOcrResults FromDynamic(dynamic ocrResult, string imageFileName,string ocrName)
         {
             AzureOcrResults azureOcrResults = new AzureOcrResults();
             azureOcrResults.Language = ocrResult.language;
             azureOcrResults.TextAngle = ocrResult.textAngle;
             azureOcrResults.Orientation = ocrResult.orientation;
             azureOcrResults.Regions = new List<AzureOcrRegion>();
+            azureOcrResults.ImageFileName = imageFileName;
+            azureOcrResults.SoftwareName = ocrName;
             foreach (dynamic region in ocrResult.regions)
             {
                 azureOcrResults.Regions.Add(AzureOcrRegion.FromDynamic(region));
@@ -36,13 +42,23 @@ namespace Ocr.Wrapper.AzureOcr
             return Map(this);
         }
 
+        public static GenericOcrLine Map(AzureOcrLine line)
+        {
+            return new GenericOcrLine()
+            {
+                Words = line.Words.Select(Get).ToList()
+            };
+        }
+
         public static GenericOcrResponse Map(AzureOcrResults azureOcrResults)
         {
             return new GenericOcrResponse
             {
-                Detections = azureOcrResults.Regions.SelectMany(r => r.Lines).SelectMany(l => l.Words).Select(w => Get(w)).ToList(),
+                Lines = azureOcrResults.Regions.SelectMany(r => r.Lines).Select(Map).ToList(),
                 Language = azureOcrResults.Language,
-                SummaryText = string.Join(Environment.NewLine, azureOcrResults.Regions.Select(r => GetText(r)))
+                SummaryText = string.Join(Environment.NewLine, azureOcrResults.Regions.Select(r => GetText(r))),
+                SoftwareName = azureOcrResults.SoftwareName,
+                ImageFileName = azureOcrResults.ImageFileName
             };
         }
 
