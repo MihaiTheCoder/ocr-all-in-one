@@ -29,4 +29,4 @@ jobs:
       run: nuget pack Ocr.Wrapper -Properties Configuration=Release
       
     - name: Publish package
-      run: nuget push Ocr.Wrapper.1.0.1.nupkg ${{secrets.NUGET_API_KEY}} -Source https://api.nuget.org/v3/index.json -SkipDuplicate
+      run: nuget push Ocr.Wrapper.1.0.2.nupkg ${{secrets.NUGET_API_KEY}} -Source https://api.nuget.org/v3/index.json -SkipDuplicate
