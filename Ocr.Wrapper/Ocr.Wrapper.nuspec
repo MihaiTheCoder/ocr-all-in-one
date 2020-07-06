@@ -13,4 +13,7 @@
     <copyright>Copyright 2020</copyright>
     <tags>OCR AWS Google Tesseract Windows Azure</tags>    
   </metadata>
+  <files>
+    <file src="Resources\Get-Text-Win-OCR.ps1" target="" />
+  </files>
 </package>
