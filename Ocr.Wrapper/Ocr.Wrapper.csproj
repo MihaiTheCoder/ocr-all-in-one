@@ -12,6 +12,9 @@
     <EmbeddedResource Include="Resources\Get-Text-Win-OCR.ps1">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
+    <EmbeddedResource Include="tools\Get-Text-Win-OCR.ps1">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
   </ItemGroup>
 
   <ItemGroup>
