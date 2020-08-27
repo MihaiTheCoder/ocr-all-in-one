@@ -58,10 +58,10 @@ namespace Ocr.Wrapper.AzureOcr
                 DetectedText = word.Text,
                 BoundingBox = new GenericBoundingBox
                 {
-                    Height = word.BoundingBox[0],
-                    Width = word.BoundingBox[1],
-                    Left = word.BoundingBox[2],
-                    Top = word.BoundingBox[3],
+                    Left = word.ParsedBoundingBox[0],
+                    Top = word.ParsedBoundingBox[1],
+                    Width = word.ParsedBoundingBox[2],
+                    Height = word.ParsedBoundingBox[3],
                 }
             };
         }

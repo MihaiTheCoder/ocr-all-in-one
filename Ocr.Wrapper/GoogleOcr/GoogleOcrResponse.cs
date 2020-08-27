@@ -31,10 +31,26 @@ namespace Ocr.Wrapper.GoogleOcr
 
         private static GenericBoxDetection Get(GoogleTextAnnotation a)
         {
+            var leftest = a.BoundingPoly.OrderBy(e => e.X).ToList();
+            var upperLeftCorner = leftest[1];
+            var height = leftest[0].Y - upperLeftCorner.Y;
+            if (leftest[0].Y < leftest[1].Y) {
+                upperLeftCorner = leftest[0];
+                height = leftest[1].Y - upperLeftCorner.Y;
+            }
+
+            var rightMostCorner = leftest.Last();
+            var widht = rightMostCorner.X - upperLeftCorner.X;
             return new GenericBoxDetection
             {
                 DetectedText = a.Description,
-                BoundingBox = new GenericBoundingBox { Height = 0, Left = 0, Top = 0, Width = 0 }
+                BoundingBox = new GenericBoundingBox 
+                {
+                    Left = upperLeftCorner.X,
+                    Top = upperLeftCorner.Y,
+                    Height = height,
+                    Width = widht
+                }
             };
         }
     }
