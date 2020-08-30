@@ -10,7 +10,7 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
 {
     public class AwsResponseMapper
     {
-        public static AwsOcrResponse Get(DetectTextResponse detectTextResponse)
+        public static AwsOcrResponse Get(DetectTextResponse detectTextResponse, string imagePath)
         {
             AwsOcrResponse ocrResponse = new AwsOcrResponse();
             ocrResponse.TextModelVersion = detectTextResponse.TextModelVersion;

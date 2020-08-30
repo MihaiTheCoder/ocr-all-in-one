@@ -34,7 +34,7 @@ namespace Ocr.Wrapper.AwsRekognitionOcr
             }
             var request = new DetectTextRequest { Image = new Image() { Bytes = ms } };
             DetectTextResponse result = await rekognitionClient.DetectTextAsync(request);
-            return AwsResponseMapper.Get(result);
+            return AwsResponseMapper.Get(result, filePath);
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Principal;
 using System.Threading.Tasks;
@@ -29,10 +30,13 @@ namespace Ocr.Wrapper.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<WindowsOcrService>();
+            Directory.CreateDirectory(Configuration["cache_path"]);
+            var cache = new FileStorageOcrCache(Configuration["cache_path"]);
             StandardMultiOcrRunnerFactory factory = new StandardMultiOcrRunnerFactory(new StandardOcrSettings {
                 WindowsOcrSettings = new WindowsOcrSettings(),
                 TesseractOcrSettings = new TesseractOcrSettings()
-            });
+               
+            }, cache);
 
             //From User Secrets, do not enter them in appSettings.json -> Right Click Ocr.Wrapper.WebAPI -> Manage User Secrets
             if (ConfigHasAllKeys("azure:SubscriptionKey", "azure:Endpoint"))

@@ -16,6 +16,8 @@ namespace Ocr.Wrapper.AzureOcr
 
         public List<AzureOcrRegion> Regions { get; set; }
 
+        public string InputImage { get; set; }
+
         public static AzureOcrResults FromDynamic(dynamic ocrResult)
         {
             AzureOcrResults azureOcrResults = new AzureOcrResults();

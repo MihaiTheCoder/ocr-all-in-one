@@ -9,6 +9,8 @@ namespace Ocr.Wrapper.TesseractOcr
 
         public string Language { get; set; }
 
+        public string InputImage { get; set; }
+
         public GenericOcrResponse Map()
         {
             return Map(this);

@@ -11,6 +11,8 @@ namespace Ocr.Wrapper.WindowsOcr
 
         public string Language { get; set; }
 
+        public string InputImage { get; set; }
+
         public static WindowsOcrResult FromDynamic(dynamic ocrResult)
         {
             var result = new WindowsOcrResult();

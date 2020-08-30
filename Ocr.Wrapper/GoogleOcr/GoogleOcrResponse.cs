@@ -6,6 +6,8 @@ namespace Ocr.Wrapper.GoogleOcr
     public class GoogleOcrResponse: IMappableToGenericResponse
     {
         public List<GoogleOcrSingleResponse> Responses { get; set; }
+        
+        public string InputImage { get; set; }
 
         public GenericOcrResponse Map()
         {

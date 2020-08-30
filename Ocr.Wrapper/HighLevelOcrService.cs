@@ -55,7 +55,8 @@ namespace Ocr.Wrapper
 
         public async Task<GenericOcrResponse> GetGenericOcrResultAsync(string inputImage, string inputLanguage = null, bool runAnywayWithBadLanguage = true)
         {
-            var result = await GetOcrResultAsync(inputImage, inputLanguage, runAnywayWithBadLanguage);
+            TResponse result = await GetOcrResultAsync(inputImage, inputLanguage, runAnywayWithBadLanguage);
+            result.InputImage = inputImage;
             return result.Map();
         }
 

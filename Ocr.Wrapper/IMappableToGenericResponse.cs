@@ -8,6 +8,8 @@ namespace Ocr.Wrapper
 {
     public interface IMappableToGenericResponse
     {
+        string InputImage { get; set; }
+
         GenericOcrResponse Map();
     }
 }
