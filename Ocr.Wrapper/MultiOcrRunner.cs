@@ -113,6 +113,15 @@ namespace Ocr.Wrapper
             return await RunAllOcrEnginesOnImage(OcrRunners, inputImagePath, language);
         }
 
+        public async Task<Dictionary<string, GenericOcrResponse>> RunSingleOcrEngineOnImage<T>(
+            string inputImagePath, Language language = Language.English)
+        {
+            var result = await RunAllOcrEnginesOnImage(OcrRunners.Where(o => o is T), 
+                inputImagePath, language);
+
+            return result;
+        }
+
         public static async Task<Dictionary<string, GenericOcrResponse>> RunAllOcrEnginesOnImage(
             IEnumerable<IGenericOcrRunner> ocrEngines,
             string inputImagePath, Language language = Language.English)

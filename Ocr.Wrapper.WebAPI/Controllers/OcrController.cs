@@ -81,5 +81,15 @@ namespace OcrFromConsole
 
             return Ok(results[0]);
         }
+
+        [HttpPost("google_high")]
+        public async Task<IActionResult> GetGoogleHighLevelResultAsync(IFormFile file)
+        {
+            var results = await AspNetFileProcessorWrapper.ProcessFilesAsync(
+                filePath => multiOcrRunner.RunSingleOcrEngineOnImage<GoogleOcrService>(filePath),
+                file);
+
+            return Ok(results[0]);
+        }
     }
 }
